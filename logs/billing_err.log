@@ -990,351 +990,430 @@ Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
 pika.exceptions.AMQPConnectionError
 [12:29:35] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-Billing] Error in _create_connection().
+[12:29:40] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:29:40] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:29:42] ERROR [Billing] Socket failed to connect: <socket.socket fd=884, family=23, type=1, proto=6, laddr=('::', 50562, 0, 0)>; error=10061 (Unknown error)
+[12:29:42] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:29:42] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:29:42] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:29:44] ERROR [Billing] Socket failed to connect: <socket.socket fd=884, family=2, type=1, proto=6, laddr=('0.0.0.0', 50564)>; error=10061 (Unknown error)
+[12:29:44] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:29:44] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:29:44] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:29:44] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:29:44] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:29:44] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:25:45] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:25:50] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:25:50] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:25:52] ERROR [Billing] Socket failed to connect: <socket.socket fd=924, family=23, type=1, proto=6, laddr=('::', 54356, 0, 0)>; error=10061 (Unknown error)
-[12:25:52] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:25:52] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:25:52] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:25:54] ERROR [Billing] Socket failed to connect: <socket.socket fd=924, family=2, type=1, proto=6, laddr=('0.0.0.0', 54366)>; error=10061 (Unknown error)
-[12:25:54] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:25:54] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:25:54] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:25:54] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:25:54] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:25:54] ERROR [Billing] Error in _create_connection().
+[12:29:44] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:29:49] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:29:49] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:29:51] ERROR [Billing] Socket failed to connect: <socket.socket fd=976, family=23, type=1, proto=6, laddr=('::', 58730, 0, 0)>; error=10061 (Unknown error)
+[12:29:51] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:29:51] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:29:51] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:29:53] ERROR [Billing] Socket failed to connect: <socket.socket fd=976, family=2, type=1, proto=6, laddr=('0.0.0.0', 58733)>; error=10061 (Unknown error)
+[12:29:53] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:29:53] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:29:53] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:29:53] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:29:53] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:29:53] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:25:54] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:25:59] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:25:59] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:26:01] ERROR [Billing] Socket failed to connect: <socket.socket fd=808, family=23, type=1, proto=6, laddr=('::', 65071, 0, 0)>; error=10061 (Unknown error)
-[12:26:01] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:26:01] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:01] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:26:03] ERROR [Billing] Socket failed to connect: <socket.socket fd=808, family=2, type=1, proto=6, laddr=('0.0.0.0', 65079)>; error=10061 (Unknown error)
-[12:26:03] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:26:03] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:03] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:26:03] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:03] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:03] ERROR [Billing] Error in _create_connection().
+[12:29:53] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:29:58] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:29:58] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:30:01] ERROR [Billing] Socket failed to connect: <socket.socket fd=856, family=23, type=1, proto=6, laddr=('::', 55337, 0, 0)>; error=10061 (Unknown error)
+[12:30:01] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:30:01] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:01] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:30:03] ERROR [Billing] Socket failed to connect: <socket.socket fd=856, family=2, type=1, proto=6, laddr=('0.0.0.0', 55707)>; error=10061 (Unknown error)
+[12:30:03] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:30:03] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:03] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:30:03] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:03] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:03] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:26:03] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:26:08] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:26:08] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:26:10] ERROR [Billing] Socket failed to connect: <socket.socket fd=904, family=23, type=1, proto=6, laddr=('::', 65105, 0, 0)>; error=10061 (Unknown error)
-[12:26:10] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:26:10] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:10] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:26:12] ERROR [Billing] Socket failed to connect: <socket.socket fd=904, family=2, type=1, proto=6, laddr=('0.0.0.0', 65110)>; error=10061 (Unknown error)
-[12:26:12] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:26:12] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:12] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:26:12] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:12] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:12] ERROR [Billing] Error in _create_connection().
+[12:30:03] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:30:08] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:30:08] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:30:10] ERROR [Billing] Socket failed to connect: <socket.socket fd=912, family=23, type=1, proto=6, laddr=('::', 57910, 0, 0)>; error=10061 (Unknown error)
+[12:30:10] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:30:10] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:10] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:30:12] ERROR [Billing] Socket failed to connect: <socket.socket fd=912, family=2, type=1, proto=6, laddr=('0.0.0.0', 57913)>; error=10061 (Unknown error)
+[12:30:12] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:30:12] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:12] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:30:12] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:12] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:12] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:26:12] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:26:17] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:26:17] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:26:19] ERROR [Billing] Socket failed to connect: <socket.socket fd=952, family=23, type=1, proto=6, laddr=('::', 65128, 0, 0)>; error=10061 (Unknown error)
-[12:26:19] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:26:19] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:19] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:26:21] ERROR [Billing] Socket failed to connect: <socket.socket fd=952, family=2, type=1, proto=6, laddr=('0.0.0.0', 65132)>; error=10061 (Unknown error)
-[12:26:21] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:26:21] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:21] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:26:21] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:21] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:21] ERROR [Billing] Error in _create_connection().
+[12:30:12] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:30:17] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:30:17] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:30:19] ERROR [Billing] Socket failed to connect: <socket.socket fd=992, family=23, type=1, proto=6, laddr=('::', 57929, 0, 0)>; error=10061 (Unknown error)
+[12:30:19] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:30:19] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:19] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:30:21] ERROR [Billing] Socket failed to connect: <socket.socket fd=992, family=2, type=1, proto=6, laddr=('0.0.0.0', 57933)>; error=10061 (Unknown error)
+[12:30:21] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:30:21] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:21] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:30:21] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:21] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:21] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:26:21] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:26:26] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:26:26] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:26:28] ERROR [Billing] Socket failed to connect: <socket.socket fd=1008, family=23, type=1, proto=6, laddr=('::', 65149, 0, 0)>; error=10061 (Unknown error)
-[12:26:28] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:26:28] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:28] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:26:30] ERROR [Billing] Socket failed to connect: <socket.socket fd=1008, family=2, type=1, proto=6, laddr=('0.0.0.0', 65155)>; error=10061 (Unknown error)
-[12:26:30] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:26:30] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:30] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:26:30] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:30] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:30] ERROR [Billing] Error in _create_connection().
+[12:30:21] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:30:26] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:30:26] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:30:28] ERROR [Billing] Socket failed to connect: <socket.socket fd=912, family=23, type=1, proto=6, laddr=('::', 57943, 0, 0)>; error=10061 (Unknown error)
+[12:30:28] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:30:28] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:28] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:30:30] ERROR [Billing] Socket failed to connect: <socket.socket fd=912, family=2, type=1, proto=6, laddr=('0.0.0.0', 57948)>; error=10061 (Unknown error)
+[12:30:30] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:30:30] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:30] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:30:30] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:30] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:30] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:26:30] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:26:35] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:26:35] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:26:37] ERROR [Billing] Socket failed to connect: <socket.socket fd=712, family=23, type=1, proto=6, laddr=('::', 65171, 0, 0)>; error=10061 (Unknown error)
-[12:26:37] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:26:37] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:37] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:26:39] ERROR [Billing] Socket failed to connect: <socket.socket fd=712, family=2, type=1, proto=6, laddr=('0.0.0.0', 65179)>; error=10061 (Unknown error)
-[12:26:39] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:26:39] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:39] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:26:39] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:39] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:39] ERROR [Billing] Error in _create_connection().
+[12:30:30] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:30:35] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:30:35] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:30:37] ERROR [Billing] Socket failed to connect: <socket.socket fd=856, family=23, type=1, proto=6, laddr=('::', 57960, 0, 0)>; error=10061 (Unknown error)
+[12:30:37] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:30:37] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:37] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:30:39] ERROR [Billing] Socket failed to connect: <socket.socket fd=856, family=2, type=1, proto=6, laddr=('0.0.0.0', 57963)>; error=10061 (Unknown error)
+[12:30:39] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:30:39] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:39] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:30:39] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:39] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:39] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:26:39] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:26:44] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:26:44] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:26:46] ERROR [Billing] Socket failed to connect: <socket.socket fd=728, family=23, type=1, proto=6, laddr=('::', 65194, 0, 0)>; error=10061 (Unknown error)
-[12:26:46] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:26:46] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:46] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:26:48] ERROR [Billing] Socket failed to connect: <socket.socket fd=728, family=2, type=1, proto=6, laddr=('0.0.0.0', 65200)>; error=10061 (Unknown error)
-[12:26:48] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:26:48] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:48] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:26:48] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:48] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:48] ERROR [Billing] Error in _create_connection().
+[12:30:39] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:30:44] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:30:44] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:30:46] ERROR [Billing] Socket failed to connect: <socket.socket fd=1044, family=23, type=1, proto=6, laddr=('::', 63592, 0, 0)>; error=10061 (Unknown error)
+[12:30:46] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:30:46] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:46] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:30:48] ERROR [Billing] Socket failed to connect: <socket.socket fd=1044, family=2, type=1, proto=6, laddr=('0.0.0.0', 63596)>; error=10061 (Unknown error)
+[12:30:48] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:30:48] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:48] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:30:48] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:48] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:48] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:26:48] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:26:53] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:26:53] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:26:55] ERROR [Billing] Socket failed to connect: <socket.socket fd=692, family=23, type=1, proto=6, laddr=('::', 58842, 0, 0)>; error=10061 (Unknown error)
-[12:26:55] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:26:55] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:55] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:26:57] ERROR [Billing] Socket failed to connect: <socket.socket fd=692, family=2, type=1, proto=6, laddr=('0.0.0.0', 58853)>; error=10061 (Unknown error)
-[12:26:57] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:26:57] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:57] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:26:57] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:57] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:26:57] ERROR [Billing] Error in _create_connection().
+[12:30:48] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:30:53] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:30:53] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:30:55] ERROR [Billing] Socket failed to connect: <socket.socket fd=1008, family=23, type=1, proto=6, laddr=('::', 63615, 0, 0)>; error=10061 (Unknown error)
+[12:30:55] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:30:55] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:55] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:30:57] ERROR [Billing] Socket failed to connect: <socket.socket fd=1008, family=2, type=1, proto=6, laddr=('0.0.0.0', 63618)>; error=10061 (Unknown error)
+[12:30:57] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:30:57] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:57] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:30:57] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:57] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:30:57] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:26:57] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:27:02] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:27:02] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:27:04] ERROR [Billing] Socket failed to connect: <socket.socket fd=904, family=23, type=1, proto=6, laddr=('::', 58874, 0, 0)>; error=10061 (Unknown error)
-[12:27:04] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:27:04] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:04] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:27:06] ERROR [Billing] Socket failed to connect: <socket.socket fd=904, family=2, type=1, proto=6, laddr=('0.0.0.0', 58880)>; error=10061 (Unknown error)
-[12:27:06] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:27:06] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:06] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:27:06] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:06] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:06] ERROR [Billing] Error in _create_connection().
+[12:30:57] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:31:02] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:31:02] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:31:04] ERROR [Billing] Socket failed to connect: <socket.socket fd=988, family=23, type=1, proto=6, laddr=('::', 62992, 0, 0)>; error=10061 (Unknown error)
+[12:31:04] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:31:04] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:04] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:31:06] ERROR [Billing] Socket failed to connect: <socket.socket fd=988, family=2, type=1, proto=6, laddr=('0.0.0.0', 63000)>; error=10061 (Unknown error)
+[12:31:06] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:31:06] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:06] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:31:06] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:06] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:06] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:27:06] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:27:11] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:27:11] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:27:13] ERROR [Billing] Socket failed to connect: <socket.socket fd=920, family=23, type=1, proto=6, laddr=('::', 58897, 0, 0)>; error=10061 (Unknown error)
-[12:27:13] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:27:13] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:13] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:27:15] ERROR [Billing] Socket failed to connect: <socket.socket fd=920, family=2, type=1, proto=6, laddr=('0.0.0.0', 58903)>; error=10061 (Unknown error)
-[12:27:15] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:27:15] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:15] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:27:15] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:15] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:15] ERROR [Billing] Error in _create_connection().
+[12:31:06] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:31:11] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:31:11] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:31:13] ERROR [Billing] Socket failed to connect: <socket.socket fd=984, family=23, type=1, proto=6, laddr=('::', 63016, 0, 0)>; error=10061 (Unknown error)
+[12:31:13] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:31:13] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:13] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:31:15] ERROR [Billing] Socket failed to connect: <socket.socket fd=984, family=2, type=1, proto=6, laddr=('0.0.0.0', 63020)>; error=10061 (Unknown error)
+[12:31:15] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:31:15] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:15] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:31:15] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:15] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:15] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:27:15] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:27:20] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:27:20] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:27:23] ERROR [Billing] Socket failed to connect: <socket.socket fd=1028, family=23, type=1, proto=6, laddr=('::', 58917, 0, 0)>; error=10061 (Unknown error)
-[12:27:23] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:27:23] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:23] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:27:25] ERROR [Billing] Socket failed to connect: <socket.socket fd=1028, family=2, type=1, proto=6, laddr=('0.0.0.0', 58924)>; error=10061 (Unknown error)
-[12:27:25] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:27:25] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:25] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:27:25] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:25] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:25] ERROR [Billing] Error in _create_connection().
+[12:31:15] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:31:20] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:31:20] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:31:22] ERROR [Billing] Socket failed to connect: <socket.socket fd=1044, family=23, type=1, proto=6, laddr=('::', 63044, 0, 0)>; error=10061 (Unknown error)
+[12:31:22] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:31:22] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:22] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:31:24] ERROR [Billing] Socket failed to connect: <socket.socket fd=1044, family=2, type=1, proto=6, laddr=('0.0.0.0', 63045)>; error=10061 (Unknown error)
+[12:31:24] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:31:24] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:24] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:31:24] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:24] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:24] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:27:25] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:27:30] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:27:30] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:27:32] ERROR [Billing] Socket failed to connect: <socket.socket fd=1028, family=23, type=1, proto=6, laddr=('::', 58942, 0, 0)>; error=10061 (Unknown error)
-[12:27:32] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:27:32] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:32] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:27:34] ERROR [Billing] Socket failed to connect: <socket.socket fd=1028, family=2, type=1, proto=6, laddr=('0.0.0.0', 58948)>; error=10061 (Unknown error)
-[12:27:34] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:27:34] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:34] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:27:34] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:34] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:34] ERROR [Billing] Error in _create_connection().
+[12:31:24] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:31:29] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:31:29] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:31:31] ERROR [Billing] Socket failed to connect: <socket.socket fd=644, family=23, type=1, proto=6, laddr=('::', 63053, 0, 0)>; error=10061 (Unknown error)
+[12:31:31] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:31:31] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:31] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:31:33] ERROR [Billing] Socket failed to connect: <socket.socket fd=644, family=2, type=1, proto=6, laddr=('0.0.0.0', 63054)>; error=10061 (Unknown error)
+[12:31:33] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:31:33] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:33] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:31:33] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:33] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:33] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:27:34] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:27:39] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:27:39] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:27:41] ERROR [Billing] Socket failed to connect: <socket.socket fd=924, family=23, type=1, proto=6, laddr=('::', 58965, 0, 0)>; error=10061 (Unknown error)
-[12:27:41] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:27:41] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:41] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:27:43] ERROR [Billing] Socket failed to connect: <socket.socket fd=924, family=2, type=1, proto=6, laddr=('0.0.0.0', 58969)>; error=10061 (Unknown error)
-[12:27:43] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:27:43] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:43] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:27:43] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:43] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:43] ERROR [Billing] Error in _create_connection().
+[12:31:33] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:31:38] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:31:38] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:31:40] ERROR [Billing] Socket failed to connect: <socket.socket fd=964, family=23, type=1, proto=6, laddr=('::', 63065, 0, 0)>; error=10061 (Unknown error)
+[12:31:40] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:31:40] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:40] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:31:42] ERROR [Billing] Socket failed to connect: <socket.socket fd=964, family=2, type=1, proto=6, laddr=('0.0.0.0', 63066)>; error=10061 (Unknown error)
+[12:31:42] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:31:42] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:42] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:31:42] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:42] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:42] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:27:43] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:27:48] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:27:48] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:27:50] ERROR [Billing] Socket failed to connect: <socket.socket fd=924, family=23, type=1, proto=6, laddr=('::', 58992, 0, 0)>; error=10061 (Unknown error)
-[12:27:50] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:27:50] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:50] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:27:52] ERROR [Billing] Socket failed to connect: <socket.socket fd=924, family=2, type=1, proto=6, laddr=('0.0.0.0', 58997)>; error=10061 (Unknown error)
-[12:27:52] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:27:52] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:52] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:27:52] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:52] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:52] ERROR [Billing] Error in _create_connection().
+[12:31:42] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:31:47] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:31:47] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:31:49] ERROR [Billing] Socket failed to connect: <socket.socket fd=748, family=23, type=1, proto=6, laddr=('::', 57450, 0, 0)>; error=10061 (Unknown error)
+[12:31:49] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:31:49] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:49] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:31:52] ERROR [Billing] Socket failed to connect: <socket.socket fd=748, family=2, type=1, proto=6, laddr=('0.0.0.0', 57451)>; error=10061 (Unknown error)
+[12:31:52] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:31:52] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:52] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:31:52] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:52] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:52] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:27:52] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:27:57] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:27:57] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:27:59] ERROR [Billing] Socket failed to connect: <socket.socket fd=1060, family=23, type=1, proto=6, laddr=('::', 54408, 0, 0)>; error=10061 (Unknown error)
-[12:27:59] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:27:59] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:27:59] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:28:01] ERROR [Billing] Socket failed to connect: <socket.socket fd=1060, family=2, type=1, proto=6, laddr=('0.0.0.0', 54412)>; error=10061 (Unknown error)
-[12:28:01] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:28:01] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:01] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:28:01] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:01] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:01] ERROR [Billing] Error in _create_connection().
+[12:31:52] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:31:57] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:31:57] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:31:59] ERROR [Billing] Socket failed to connect: <socket.socket fd=872, family=23, type=1, proto=6, laddr=('::', 57458, 0, 0)>; error=10061 (Unknown error)
+[12:31:59] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:31:59] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:31:59] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:32:01] ERROR [Billing] Socket failed to connect: <socket.socket fd=872, family=2, type=1, proto=6, laddr=('0.0.0.0', 57462)>; error=10061 (Unknown error)
+[12:32:01] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:32:01] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:01] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:32:01] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:01] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:01] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:28:01] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:28:06] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:28:06] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:28:08] ERROR [Billing] Socket failed to connect: <socket.socket fd=1032, family=23, type=1, proto=6, laddr=('::', 54430, 0, 0)>; error=10061 (Unknown error)
-[12:28:08] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:28:08] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:08] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:28:10] ERROR [Billing] Socket failed to connect: <socket.socket fd=1032, family=2, type=1, proto=6, laddr=('0.0.0.0', 54434)>; error=10061 (Unknown error)
-[12:28:10] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:28:10] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:10] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:28:10] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:10] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:10] ERROR [Billing] Error in _create_connection().
+[12:32:01] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:32:06] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:32:06] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:32:08] ERROR [Billing] Socket failed to connect: <socket.socket fd=1080, family=23, type=1, proto=6, laddr=('::', 57481, 0, 0)>; error=10061 (Unknown error)
+[12:32:08] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:32:08] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:08] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:32:10] ERROR [Billing] Socket failed to connect: <socket.socket fd=1080, family=2, type=1, proto=6, laddr=('0.0.0.0', 57482)>; error=10061 (Unknown error)
+[12:32:10] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:32:10] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:10] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:32:10] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:10] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:10] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:28:10] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:28:15] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:28:15] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:28:17] ERROR [Billing] Socket failed to connect: <socket.socket fd=624, family=23, type=1, proto=6, laddr=('::', 54451, 0, 0)>; error=10061 (Unknown error)
-[12:28:17] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:28:17] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:17] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:28:19] ERROR [Billing] Socket failed to connect: <socket.socket fd=624, family=2, type=1, proto=6, laddr=('0.0.0.0', 54458)>; error=10061 (Unknown error)
-[12:28:19] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:28:19] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:19] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:28:19] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:19] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:19] ERROR [Billing] Error in _create_connection().
+[12:32:10] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:32:15] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:32:15] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:32:17] ERROR [Billing] Socket failed to connect: <socket.socket fd=872, family=23, type=1, proto=6, laddr=('::', 57489, 0, 0)>; error=10061 (Unknown error)
+[12:32:17] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:32:17] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:17] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:32:19] ERROR [Billing] Socket failed to connect: <socket.socket fd=872, family=2, type=1, proto=6, laddr=('0.0.0.0', 57491)>; error=10061 (Unknown error)
+[12:32:19] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:32:19] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:19] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:32:19] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:19] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:19] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:28:19] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:28:24] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:28:24] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:28:26] ERROR [Billing] Socket failed to connect: <socket.socket fd=624, family=23, type=1, proto=6, laddr=('::', 54473, 0, 0)>; error=10061 (Unknown error)
-[12:28:26] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:28:26] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:26] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:28:28] ERROR [Billing] Socket failed to connect: <socket.socket fd=624, family=2, type=1, proto=6, laddr=('0.0.0.0', 54480)>; error=10061 (Unknown error)
-[12:28:28] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:28:28] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:28] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:28:28] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:28] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:28] ERROR [Billing] Error in _create_connection().
+[12:32:19] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:32:24] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:32:24] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:32:26] ERROR [Billing] Socket failed to connect: <socket.socket fd=856, family=23, type=1, proto=6, laddr=('::', 57498, 0, 0)>; error=10061 (Unknown error)
+[12:32:26] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:32:26] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:26] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:32:28] ERROR [Billing] Socket failed to connect: <socket.socket fd=856, family=2, type=1, proto=6, laddr=('0.0.0.0', 57499)>; error=10061 (Unknown error)
+[12:32:28] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:32:28] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:28] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:32:28] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:28] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:28] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:28:28] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
-[12:28:33] INFO [Billing] Conectando a RabbitMQ (localhost)...
-[12:28:33] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
-[12:28:35] ERROR [Billing] Socket failed to connect: <socket.socket fd=1044, family=23, type=1, proto=6, laddr=('::', 54504, 0, 0)>; error=10061 (Unknown error)
-[12:28:35] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
-[12:28:35] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:35] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
-[12:28:37] ERROR [Billing] Socket failed to connect: <socket.socket fd=1044, family=2, type=1, proto=6, laddr=('0.0.0.0', 54508)>; error=10061 (Unknown error)
-[12:28:37] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
-[12:28:37] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:37] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
-[12:28:37] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:37] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
-[12:28:37] ERROR [Billing] Error in _create_connection().
+[12:32:28] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:32:33] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:32:33] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:32:35] ERROR [Billing] Socket failed to connect: <socket.socket fd=1028, family=23, type=1, proto=6, laddr=('::', 61726, 0, 0)>; error=10061 (Unknown error)
+[12:32:35] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:32:35] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:35] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:32:37] ERROR [Billing] Socket failed to connect: <socket.socket fd=1028, family=2, type=1, proto=6, laddr=('0.0.0.0', 61727)>; error=10061 (Unknown error)
+[12:32:37] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:32:37] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:37] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:32:37] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:37] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:37] ERROR [Billing] Error in _create_connection().
 Traceback (most recent call last):
   File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
-    raise self._reap_last_connection_workflow_error(error)
 pika.exceptions.AMQPConnectionError
-[12:28:37] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:32:37] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:32:42] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:32:42] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:32:44] ERROR [Billing] Socket failed to connect: <socket.socket fd=964, family=23, type=1, proto=6, laddr=('::', 61035, 0, 0)>; error=10061 (Unknown error)
+[12:32:44] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:32:44] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:44] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:32:46] ERROR [Billing] Socket failed to connect: <socket.socket fd=964, family=2, type=1, proto=6, laddr=('0.0.0.0', 58870)>; error=10061 (Unknown error)
+[12:32:46] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:32:46] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:46] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:32:46] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:46] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:46] ERROR [Billing] Error in _create_connection().
+Traceback (most recent call last):
+  File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
+pika.exceptions.AMQPConnectionError
+[12:32:46] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:32:51] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:32:51] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:32:53] ERROR [Billing] Socket failed to connect: <socket.socket fd=964, family=23, type=1, proto=6, laddr=('::', 58885, 0, 0)>; error=10061 (Unknown error)
+[12:32:53] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:32:53] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:53] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:32:55] ERROR [Billing] Socket failed to connect: <socket.socket fd=964, family=2, type=1, proto=6, laddr=('0.0.0.0', 58886)>; error=10061 (Unknown error)
+[12:32:55] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:32:55] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:55] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:32:55] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:55] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:32:55] ERROR [Billing] Error in _create_connection().
+Traceback (most recent call last):
+  File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
+pika.exceptions.AMQPConnectionError
+[12:32:55] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:33:00] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:33:00] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:33:02] ERROR [Billing] Socket failed to connect: <socket.socket fd=1076, family=23, type=1, proto=6, laddr=('::', 58893, 0, 0)>; error=10061 (Unknown error)
+[12:33:02] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:33:02] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:02] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:33:04] ERROR [Billing] Socket failed to connect: <socket.socket fd=1076, family=2, type=1, proto=6, laddr=('0.0.0.0', 58894)>; error=10061 (Unknown error)
+[12:33:04] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:33:04] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:04] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:33:04] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:04] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:04] ERROR [Billing] Error in _create_connection().
+Traceback (most recent call last):
+  File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
+pika.exceptions.AMQPConnectionError
+[12:33:04] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:33:09] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:33:09] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:33:11] ERROR [Billing] Socket failed to connect: <socket.socket fd=1112, family=23, type=1, proto=6, laddr=('::', 58901, 0, 0)>; error=10061 (Unknown error)
+[12:33:11] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:33:11] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:11] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:33:13] ERROR [Billing] Socket failed to connect: <socket.socket fd=1112, family=2, type=1, proto=6, laddr=('0.0.0.0', 58902)>; error=10061 (Unknown error)
+[12:33:13] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:33:13] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:13] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:33:13] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:13] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:13] ERROR [Billing] Error in _create_connection().
+Traceback (most recent call last):
+  File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
+pika.exceptions.AMQPConnectionError
+[12:33:13] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:33:18] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:33:18] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
+[12:33:20] ERROR [Billing] Socket failed to connect: <socket.socket fd=1124, family=23, type=1, proto=6, laddr=('::', 58909, 0, 0)>; error=10061 (Unknown error)
+[12:33:20] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET6: 23>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('::1', 5672, 0, 0))
+[12:33:20] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:20] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[12:33:22] ERROR [Billing] Socket failed to connect: <socket.socket fd=1124, family=2, type=1, proto=6, laddr=('0.0.0.0', 58910)>; error=10061 (Unknown error)
+[12:33:22] ERROR [Billing] TCP Connection attempt failed: ConnectionRefusedError(10061, 'Unknown error'); dest=(<AddressFamily.AF_INET: 2>, <SocketKind.SOCK_STREAM: 1>, 6, '', ('127.0.0.1', 5672))
+[12:33:22] ERROR [Billing] AMQPConnector - reporting failure: AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:22] ERROR [Billing] AMQP connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error').
+[12:33:22] ERROR [Billing] AMQPConnectionWorkflow - reporting failure: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:22] ERROR [Billing] Connection workflow failed: AMQPConnectionWorkflowFailed: 2 exceptions in all; last exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error'); first exception - AMQPConnectorSocketConnectError: ConnectionRefusedError(10061, 'Unknown error')
+[12:33:22] ERROR [Billing] Error in _create_connection().
+Traceback (most recent call last):
+  File "C:\Users\Usuario iTC\OneDrive\Desktop\Proyecto-Distribuidos\Proyecto-Sistemas-Distribuidos-U1\.venv\Lib\site-packages\pika\adapters\blocking_connection.py", line 451, in _create_connection
+pika.exceptions.AMQPConnectionError
+[12:33:22] ERROR [Billing] RabbitMQ no disponible: . Reintentando en 5s...
+[12:33:27] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[12:33:27] INFO [Billing] Pika version 1.3.2 connecting to ('::1', 5672, 0, 0)
