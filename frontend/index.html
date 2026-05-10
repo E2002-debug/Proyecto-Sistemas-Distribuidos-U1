@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeliveryTrack — Panel de Control</title>
+  <meta name="description" content="Panel de administración del sistema de delivery distribuido en tiempo real." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ── Layout ── */
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .9rem 2rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(16px);
+    }
+    .logo { font-weight: 800; font-size: 1.1rem; }
+    .logo span { color: var(--primary); }
+
+    .main-content {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ── App Cards ── */
+    .app-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media(max-width:700px){ .app-cards { grid-template-columns: 1fr; } }
+
+    .app-card {
+      display: flex; flex-direction: column;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all var(--transition);
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 4px 4px 0 0;
+    }
+    .app-card.client::before  { background: linear-gradient(90deg, #6C63FF, #3ECFFF); }
+    .app-card.driver::before  { background: linear-gradient(90deg, #FFB547, #FF6B6B); }
+
+    .app-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-glow);
+      box-shadow: var(--shadow-glow);
+    }
+    .app-card-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .app-card h2   { font-size: 1.4rem; font-weight: 800; margin-bottom: .4rem; }
+    .app-card p    { font-size: .9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem; }
+
+    .app-card-features {
+      display: flex; flex-direction: column; gap: .4rem;
+      margin-bottom: 1.5rem;
+    }
+    .feature-item {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .82rem; color: var(--text-secondary);
+    }
+    .feature-item::before { content: '✓'; color: var(--success); font-weight: 700; }
+
+    .app-card .btn { align-self: flex-start; }
+
+    /* ── Section Header ── */
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+    .section-header h2 {
+      font-size: 1.2rem; font-weight: 800;
+      display: flex; align-items: center; gap: .6rem;
+    }
+
+    /* ── Create Order Form ── */
+    .create-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 1rem;
+      align-items: end;
+    }
+    @media(max-width:900px){ .form-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:600px){ .form-grid { grid-template-columns: 1fr; } }
+
+    /* ── Orders Table ── */
+    .db-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .db-panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .db-panel-header h2 {
+      font-size: 1rem; font-weight: 700;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .db-count {
+      background: rgba(108,99,255,.15);
+      color: var(--primary);
+      border-radius: 999px;
+      padding: .15rem .6rem;
+      font-size: .75rem;
+      font-weight: 700;
+    }
+
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .85rem;
+    }
+    th {
+      text-align: left;
+      padding: .75rem 1.25rem;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card-2);
+      white-space: nowrap;
+    }
+    td {
+      padding: .9rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,.02); }
+
+    .td-id {
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: .05em;
+      font-size: .9rem;
+    }
+    .td-name { font-weight: 600; color: var(--text-primary); }
+
+    .action-btns { display: flex; gap: .4rem; }
+    .btn-xs {
+      padding: .3rem .7rem;
+      font-size: .75rem;
+      border-radius: 8px;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+    }
+    .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: .75rem; }
+    .empty-state p { font-size: .9rem; }
+
+    /* Loading */
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.15);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: .3rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Status row indicator */
+    .row-status-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-right: .4rem;
+      vertical-align: middle;
+    }
+    .status-pendiente  .row-status-dot { background: var(--text-muted); }
+    .status-recogiendo .row-status-dot { background: var(--warning); box-shadow: 0 0 6px var(--warning); }
+    .status-encamino   .row-status-dot { background: var(--info);    box-shadow: 0 0 6px var(--info); }
+    .status-entregado  .row-status-dot { background: var(--success); }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    @media(max-width:700px){ .stats-row { grid-template-columns: 1fr 1fr; } }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .stat-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .stat-icon.purple { background: rgba(108,99,255,.15); }
+    .stat-icon.orange { background: rgba(255,181,71,.15); }
+    .stat-icon.blue   { background: rgba(62,207,255,.15); }
+    .stat-icon.green  { background: rgba(0,200,150,.15); }
+    .stat-value { font-size: 1.6rem; font-weight: 900; line-height: 1; }
+    .stat-label { font-size: .75rem; color: var(--text-muted); margin-top: .2rem; }
+
+    footer {
+      text-align: center; padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted); font-size: .8rem;
+    }
+  </style>
+</head>
+<body>
+<div id="toast-container"></div>
+
+<header>
+  <div class="logo">Delivery<span>Track</span> <span style="color:var(--text-muted);font-weight:400;font-size:.85rem;">— Panel de Control</span></div>
+  <div style="display:flex;gap:.6rem;">
+    <a href="client.html" class="btn btn-ghost" id="nav-client" style="font-size:.85rem;">📱 App Cliente</a>
+    <a href="driver.html" class="btn btn-primary" id="nav-driver" style="font-size:.85rem;">🚴 App Repartidor</a>
+  </div>
+</header>
+
+<div class="main-content">
+
+  <!-- Stats -->
+  <div class="stats-row" id="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon purple">📦</div>
+      <div>
+        <div class="stat-value" id="stat-total">—</div>
+        <div class="stat-label">Total pedidos</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon orange">🏪</div>
+      <div>
+        <div class="stat-value" id="stat-recogiendo">—</div>
+        <div class="stat-label">Recogiendo</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon blue">🚴</div>
+      <div>
+        <div class="stat-value" id="stat-encamino">—</div>
+        <div class="stat-label">En camino</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">✅</div>
+      <div>
+        <div class="stat-value" id="stat-entregado">—</div>
+        <div class="stat-label">Entregados</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Links -->
+  <div class="app-cards">
+    <a href="client.html" class="app-card client" id="card-client">
+      <div class="app-card-icon">📱</div>
+      <h2>App Cliente</h2>
+      <p>Sigue tu pedido en tiempo real en el mapa de Loja. Recibe notificaciones automáticas de cada cambio de estado.</p>
+      <div class="app-card-features">
+        <div class="feature-item">Mapa en tiempo real (Leaflet.js)</div>
+        <div class="feature-item">Notificaciones push via SSE</div>
+        <div class="feature-item">Timeline del estado del pedido</div>
+        <div class="feature-item">ETA estimado de entrega</div>
+      </div>
+      <span class="btn btn-primary">Abrir App Cliente →</span>
+    </a>
+
+    <a href="driver.html" class="app-card driver" id="card-driver">
+      <div class="app-card-icon">🚴</div>
+      <h2>App Repartidor</h2>
+      <p>Panel del repartidor para seleccionar pedidos, enviar ubicación GPS y actualizar el estado de la entrega.</p>
+      <div class="app-card-features">
+        <div class="feature-item">Selección de pedido desde lista</div>
+        <div class="feature-item">Simulación GPS por Loja</div>
+        <div class="feature-item">Cambio de estado en tiempo real</div>
+        <div class="feature-item">Publicación automática en RabbitMQ</div>
+      </div>
+      <span class="btn btn-warning">Abrir App Repartidor →</span>
+    </a>
+  </div>
+
+  <!-- Create Order -->
+  <div>
+    <div class="section-header">
+      <h2>📦 Crear Nuevo Pedido</h2>
+    </div>
+    <div class="create-form">
+      <div class="form-grid">
+        <div class="form-group" style="margin:0;">
+          <label for="inp-customer">Nombre del Cliente</label>
+          <input class="input" id="inp-customer" placeholder="Ej: María García" />
+        </div>
+        <div class="form-group" style="margin:0;">
+          <label for="inp-address">Dirección de Entrega</label>
+          <input class="input" id="inp-address" placeholder="Ej: Av. 24 de Mayo, Loja" />
+        </div>
+        <div class="form-group" style="margin:0;">
+          <label for="inp-driver">Nombre del Repartidor</label>
+          <input class="input" id="inp-driver" placeholder="Ej: Carlos López" />
+        </div>
+        <button class="btn btn-primary" id="btn-create" onclick="createOrder()">
+          ＋ Crear Pedido
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Orders DB -->
+  <div>
+    <div class="section-header">
+      <h2>🗄️ Base de Datos — Pedidos</h2>
+      <button class="btn btn-ghost" id="btn-refresh" onclick="loadOrders()" style="font-size:.82rem;">
+        🔄 Actualizar
+      </button>
+    </div>
+    <div class="db-panel">
+      <div class="db-panel-header">
+        <h2>📋 Tabla <code style="color:var(--primary);font-size:.85rem;">orders</code>
+          <span class="db-count" id="order-count">0</span>
+        </h2>
+        <span style="font-size:.78rem;color:var(--text-muted);">Tracking Server · SQLite · Puerto 3000</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Pedido</th>
+              <th>Cliente</th>
+              <th>Repartidor</th>
+              <th>Dirección</th>
+              <th>Estado</th>
+              <th>Creado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="orders-tbody">
+            <tr>
+              <td colspan="7">
+                <div class="empty-state">
+                  <div class="empty-icon">⏳</div>
+                  <p>Cargando pedidos...</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-content -->
+
+<footer>
+  DeliveryTrack © 2025 — Sistemas Distribuidos Unidad I · Universidad Nacional de Loja
+</footer>
+
+<script>
+const TRACKING_URL = 'http://localhost:3000';
+
+// ── Status config ─────────────────────────────────────────────────────────────
+const STATUS_CFG = {
+  'Pendiente':  { badge: 'badge-pending',  cls: 'status-pendiente',  label: '⏳ Pendiente' },
+  'Recogiendo': { badge: 'badge-picking',  cls: 'status-recogiendo', label: '🏪 Recogiendo' },
+  'En camino':  { badge: 'badge-transit',  cls: 'status-encamino',   label: '🚴 En camino' },
+  'Entregado':  { badge: 'badge-done',     cls: 'status-entregado',  label: '✅ Entregado' },
+};
+
+// ── Load orders ───────────────────────────────────────────────────────────────
+async function loadOrders() {
+  const btn = document.getElementById('btn-refresh');
+  btn.innerHTML = '<span class="spinner"></span> Cargando...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(`${TRACKING_URL}/api/orders`);
+    const orders = await res.json();
+    renderOrders(orders);
+    updateStats(orders);
+  } catch (err) {
+    showToast('No se pudo conectar al Tracking Server', 'error');
+    document.getElementById('orders-tbody').innerHTML = `
+      <tr><td colspan="7">
+        <div class="empty-state">
+          <div class="empty-icon">❌</div>
+          <p>Error al cargar: servidor no disponible en puerto 3000</p>
+        </div>
+      </td></tr>`;
+  } finally {
+    btn.innerHTML = '🔄 Actualizar';
+    btn.disabled = false;
+  }
+}
+
+function renderOrders(orders) {
+  const tbody = document.getElementById('orders-tbody');
+  document.getElementById('order-count').textContent = orders.length;
+
+  if (!orders.length) {
+    tbody.innerHTML = `
+      <tr><td colspan="7">
+        <div class="empty-state">
+          <div class="empty-icon">📭</div>
+          <p>No hay pedidos aún. ¡Crea el primero arriba!</p>
+        </div>
+      </td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = orders.map(o => {
+    const cfg = STATUS_CFG[o.status] || STATUS_CFG['Pendiente'];
+    const date = new Date(o.created_at).toLocaleString('es-EC', {
+      month: 'short', day: '2-digit',
+      hour: '2-digit', minute: '2-digit'
+    });
+    return `
+      <tr class="${cfg.cls}">
+        <td><span class="row-status-dot"></span><span class="td-id">${o.id}</span></td>
+        <td><span class="td-name">👤 ${o.customer_name}</span></td>
+        <td>🚴 ${o.delivery_person_name || '—'}</td>
+        <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${o.address}">📍 ${o.address}</td>
+        <td><span class="badge ${cfg.badge}">${cfg.label}</span></td>
+        <td style="font-family:monospace;font-size:.78rem;">${date}</td>
+        <td>
+          <div class="action-btns">
+            <a href="client.html?order=${o.id}" class="btn btn-ghost btn-xs" title="Ver como cliente">📱</a>
+            <a href="driver.html?order=${o.id}" class="btn btn-warning btn-xs" title="Abrir como repartidor">🚴</a>
+            <button class="btn btn-ghost btn-xs" onclick="copyId('${o.id}')" title="Copiar ID">📋</button>
+          </div>
+        </td>
+      </tr>`;
+  }).join('');
+}
+
+function updateStats(orders) {
+  document.getElementById('stat-total').textContent     = orders.length;
+  document.getElementById('stat-recogiendo').textContent = orders.filter(o => o.status === 'Recogiendo').length;
+  document.getElementById('stat-encamino').textContent   = orders.filter(o => o.status === 'En camino').length;
+  document.getElementById('stat-entregado').textContent  = orders.filter(o => o.status === 'Entregado').length;
+}
+
+// ── Create order ──────────────────────────────────────────────────────────────
+async function createOrder() {
+  const customer = document.getElementById('inp-customer').value.trim();
+  const address  = document.getElementById('inp-address').value.trim();
+  const driver   = document.getElementById('inp-driver').value.trim();
+
+  if (!customer || !address) {
+    showToast('Por favor completa nombre del cliente y dirección', 'warning');
+    return;
+  }
+
+  const btn = document.getElementById('btn-create');
+  btn.innerHTML = '<span class="spinner"></span> Creando...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(`${TRACKING_URL}/api/orders`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ customerName: customer, address, deliveryPersonName: driver || 'Repartidor' })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    showToast(`✅ Pedido ${data.orderId} creado`, 'success');
+
+    // Clear form
+    document.getElementById('inp-customer').value = '';
+    document.getElementById('inp-address').value  = '';
+    document.getElementById('inp-driver').value   = '';
+
+    // Refresh table
+    await loadOrders();
+
+    // Show ID
+    showOrderCreated(data.orderId);
+  } catch (err) {
+    showToast(`Error: ${err.message}`, 'error');
+  } finally {
+    btn.innerHTML = '＋ Crear Pedido';
+    btn.disabled = false;
+  }
+}
+
+function showOrderCreated(orderId) {
+  // Create a toast with action buttons
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast success';
+  toast.style.minWidth = '340px';
+  toast.innerHTML = `
+    <div class="toast-icon">🎉</div>
+    <div class="toast-body">
+      <div class="toast-title">Pedido creado: <code style="color:var(--primary)">${orderId}</code></div>
+      <div style="display:flex;gap:.4rem;margin-top:.5rem;">
+        <a href="client.html?order=${orderId}" class="btn btn-ghost btn-xs">📱 Cliente</a>
+        <a href="driver.html?order=${orderId}" class="btn btn-primary btn-xs">🚴 Repartidor</a>
+        <button class="btn btn-ghost btn-xs" onclick="copyId('${orderId}')">📋 Copiar ID</button>
+      </div>
+    </div>`;
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 8000);
+}
+
+function copyId(id) {
+  navigator.clipboard.writeText(id).then(() => showToast(`ID ${id} copiado`, 'success'));
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(message, type = 'info') {
+  const icons  = { success:'✅', info:'ℹ️', warning:'⚠️', error:'❌' };
+  const titles = { success:'Éxito', info:'Info', warning:'Atención', error:'Error' };
+  const cont   = document.getElementById('toast-container');
+  const toast  = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">${icons[type]||'ℹ️'}</div>
+    <div class="toast-body">
+      <div class="toast-title">${titles[type]}</div>
+      <div class="toast-msg">${message}</div>
+    </div>`;
+  cont.appendChild(toast);
+  setTimeout(() => toast.remove(), 4500);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+loadOrders();
+// Auto-refresh every 10 seconds
+setInterval(loadOrders, 10000);
+</script>
+</body>
+</html>

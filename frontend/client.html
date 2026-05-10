@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DeliveryTrack — App Cliente</title>
+  <meta name="description" content="Sigue tu pedido en tiempo real en el mapa de Loja, Ecuador."/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+    body { display:flex; flex-direction:column; min-height:100vh; }
+    header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.9rem 1.5rem;
+      background:var(--bg-card);
+      border-bottom:1px solid var(--border);
+      flex-shrink:0;
+    }
+    .logo { font-weight:800; font-size:1rem; }
+    .logo span { color:var(--primary); }
+    .conn-info { display:flex; align-items:center; gap:.5rem; font-size:.8rem; color:var(--text-secondary); }
+
+    main {
+      flex:1; display:grid;
+      grid-template-columns:1fr 340px;
+      overflow:hidden;
+    }
+    @media(max-width:768px){
+      main { grid-template-columns:1fr; grid-template-rows:300px auto; }
+    }
+
+    #map { width:100%; height:100%; z-index:1; }
+
+    /* Right panel */
+    .panel {
+      background:var(--bg-card);
+      border-left:1px solid var(--border);
+      overflow-y:auto;
+      display:flex; flex-direction:column;
+      gap:1rem;
+      padding:1.25rem;
+    }
+    .section-label {
+      font-size:.7rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:.1em; color:var(--text-muted); margin-bottom:.5rem;
+    }
+
+    /* Back link */
+    .back-link {
+      display:inline-flex; align-items:center; gap:.3rem;
+      font-size:.8rem; color:var(--text-muted);
+      margin-bottom: .25rem;
+      transition: color var(--transition);
+    }
+    .back-link:hover { color:var(--primary); }
+
+    /* Order info */
+    .order-info-card {
+      background:var(--bg-card-2);
+      border:1px solid var(--border);
+      border-radius:var(--radius-md);
+      padding:1rem;
+    }
+    .order-info-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:.5rem; }
+    .order-info-row:last-child { margin-bottom:0; }
+    .oi-label { font-size:.75rem; color:var(--text-muted); }
+    .oi-value { font-size:.85rem; font-weight:600; }
+
+    /* Status timeline */
+    .timeline { display:flex; flex-direction:column; gap:0; }
+    .tl-item {
+      display:flex; gap:.75rem; align-items:flex-start;
+      padding:.65rem 0; position:relative;
+    }
+    .tl-item:not(:last-child)::after {
+      content:''; position:absolute;
+      left:15px; top:38px;
+      width:2px; height:calc(100% - 18px);
+      background:var(--border);
+    }
+    .tl-dot {
+      width:30px; height:30px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.9rem; flex-shrink:0;
+      background:var(--bg-card-2); border:2px solid var(--border);
+      position:relative; z-index:1;
+      transition:all var(--transition);
+    }
+    .tl-dot.active { border-color:var(--success); background:rgba(0,200,150,.15); }
+    .tl-dot.done   { border-color:var(--success); background:var(--success); }
+    .tl-content h4 { font-size:.85rem; font-weight:700; }
+    .tl-content p  { font-size:.75rem; color:var(--text-secondary); }
+    .tl-time       { font-size:.7rem; color:var(--text-muted); margin-top:.1rem; font-family:monospace; }
+
+    /* Notifications */
+    #notif-list { display:flex; flex-direction:column; gap:.5rem; max-height:200px; overflow-y:auto; }
+    .notif-item {
+      display:flex; gap:.6rem; align-items:flex-start;
+      padding:.6rem .8rem; border-radius:var(--radius-sm);
+      background:var(--bg-card-2); border-left:3px solid var(--primary);
+      font-size:.78rem;
+    }
+    .notif-item.success { border-left-color:var(--success); }
+    .notif-item.warning { border-left-color:var(--warning); }
+    .notif-item.info    { border-left-color:var(--info); }
+    .notif-msg  { flex:1; color:var(--text-primary); }
+    .notif-time { color:var(--text-muted); font-family:monospace; font-size:.7rem; }
+
+    /* Live coords */
+    .coords-display {
+      font-family:monospace; font-size:.78rem;
+      color:var(--text-secondary);
+      background:var(--bg-card-2); border:1px solid var(--border);
+      border-radius:var(--radius-sm); padding:.5rem .8rem;
+    }
+
+    /* ETA */
+    .eta-box {
+      text-align:center;
+      background:linear-gradient(135deg, rgba(108,99,255,.15), rgba(62,207,255,.1));
+      border:1px solid rgba(108,99,255,.3);
+      border-radius:var(--radius-md); padding:1rem;
+    }
+    .eta-number { font-size:2.5rem; font-weight:900; color:var(--primary); line-height:1; }
+    .eta-label  { font-size:.78rem; color:var(--text-secondary); margin-top:.25rem; }
+
+    /* Connect panel */
+    .connect-card {
+      background: var(--bg-card-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<div id="toast-container"></div>
+
+<header>
+  <div>
+    <a href="index.html" class="back-link">← Panel de Control</a>
+    <div class="logo">Delivery<span>Track</span> — <span style="color:var(--info)">📱 Cliente</span></div>
+  </div>
+  <div class="conn-info">
+    <div class="conn-dot" id="conn-dot"></div>
+    <span id="conn-label">Desconectado</span>
+  </div>
+</header>
+
+<main>
+  <!-- Map -->
+  <div id="map"></div>
+
+  <!-- Right Panel -->
+  <aside class="panel">
+
+    <!-- Connect -->
+    <div>
+      <div class="section-label">Seguir mi Pedido</div>
+      <div class="connect-card">
+        <div class="form-group">
+          <label for="order-id-input">ID del Pedido</label>
+          <div style="display:flex;gap:.5rem;">
+            <input class="input" id="order-id-input" placeholder="Ej: A1B2C3D4" maxlength="8"
+                   style="text-transform:uppercase;"/>
+            <button class="btn btn-primary" id="btn-track" onclick="trackOrder()">Seguir</button>
+          </div>
+        </div>
+        <a href="index.html" style="display:block;text-align:center;font-size:.77rem;color:var(--text-muted);margin-top:.25rem;">
+          ¿No tienes un ID? → Crea un pedido en el Panel
+        </a>
+      </div>
+    </div>
+
+    <!-- Order Info (hidden until connected) -->
+    <div id="order-panel" style="display:none;">
+      <div class="section-label">Detalles del Pedido</div>
+      <div class="order-info-card">
+        <div class="order-info-row">
+          <span class="oi-label">Pedido #</span>
+          <span class="oi-value" id="oi-id">—</span>
+        </div>
+        <div class="order-info-row">
+          <span class="oi-label">Repartidor</span>
+          <span class="oi-value" id="oi-driver">—</span>
+        </div>
+        <div class="order-info-row">
+          <span class="oi-label">Dirección</span>
+          <span class="oi-value" id="oi-address" style="font-size:.78rem;text-align:right;max-width:160px;">—</span>
+        </div>
+      </div>
+
+      <!-- ETA -->
+      <div class="eta-box" style="margin-top:.75rem;">
+        <div class="eta-number" id="eta-value">—</div>
+        <div class="eta-label">minutos estimados de llegada</div>
+      </div>
+
+      <!-- Live coords -->
+      <div class="coords-display" id="coords-display" style="margin-top:.5rem;">
+        📍 Esperando ubicación del repartidor...
+      </div>
+    </div>
+
+    <!-- Status Timeline (hidden until connected) -->
+    <div id="timeline-panel" style="display:none;">
+      <div class="section-label">Estado del Pedido</div>
+      <div class="timeline">
+        <div class="tl-item" id="tl-pendiente">
+          <div class="tl-dot active" id="dot-pendiente">📋</div>
+          <div class="tl-content">
+            <h4>Pedido Confirmado</h4>
+            <p>Tu pedido fue registrado</p>
+            <div class="tl-time" id="time-pendiente">—</div>
+          </div>
+        </div>
+        <div class="tl-item" id="tl-recogiendo">
+          <div class="tl-dot" id="dot-recogiendo">🏪</div>
+          <div class="tl-content">
+            <h4>Recogiendo</h4>
+            <p>El repartidor está en el local</p>
+            <div class="tl-time" id="time-recogiendo">—</div>
+          </div>
+        </div>
+        <div class="tl-item" id="tl-encamino">
+          <div class="tl-dot" id="dot-encamino">🚴</div>
+          <div class="tl-content">
+            <h4>En Camino</h4>
+            <p>En ruta hacia tu dirección</p>
+            <div class="tl-time" id="time-encamino">—</div>
+          </div>
+        </div>
+        <div class="tl-item" id="tl-entregado">
+          <div class="tl-dot" id="dot-entregado">✅</div>
+          <div class="tl-content">
+            <h4>Entregado</h4>
+            <p>¡Pedido entregado!</p>
+            <div class="tl-time" id="time-entregado">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notif-panel" style="display:none;">
+      <div class="section-label">Notificaciones</div>
+      <div id="notif-list">
+        <div style="font-size:.78rem;color:var(--text-muted);text-align:center;padding:.5rem;">
+          Sin notificaciones aún
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="assets/js/client.js"></script>
+<script>
+  // Auto-load order from URL param
+  window.addEventListener('load', () => {
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('order');
+    if (orderId) {
+      document.getElementById('order-id-input').value = orderId.toUpperCase();
+      trackOrder();
+    }
+  });
+</script>
+</body>
+</html>

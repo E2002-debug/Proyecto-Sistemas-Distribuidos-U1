@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DeliveryTrack — App Repartidor</title>
+  <meta name="description" content="Panel del repartidor: selecciona un pedido, envía tu ubicación y actualiza el estado."/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+    body { display:flex; flex-direction:column; min-height:100vh; }
+    header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.9rem 1.5rem;
+      background:var(--bg-card);
+      border-bottom:1px solid var(--border);
+      flex-shrink:0;
+    }
+    .logo { font-weight:800; font-size:1rem; }
+    .logo span { color:var(--primary); }
+    .conn-info { display:flex; align-items:center; gap:.5rem; font-size:.8rem; color:var(--text-secondary); }
+
+    main {
+      flex:1; display:grid;
+      grid-template-columns:360px 1fr;
+      overflow:hidden;
+    }
+    @media(max-width:768px){
+      main { grid-template-columns:1fr; grid-template-rows:auto 320px; }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background:var(--bg-card);
+      border-right:1px solid var(--border);
+      display:flex; flex-direction:column;
+      overflow-y:auto; padding:1.25rem; gap:1rem;
+    }
+    .section-label {
+      font-size:.7rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:.1em; color:var(--text-muted); margin-bottom:.5rem;
+    }
+    #map { width:100%; height:100%; z-index:1; }
+
+    /* Back link */
+    .back-link {
+      display:inline-flex; align-items:center; gap:.3rem;
+      font-size:.8rem; color:var(--text-muted);
+      margin-bottom: .25rem;
+      transition: color var(--transition);
+    }
+    .back-link:hover { color:var(--primary); }
+
+    /* Orders list */
+    .order-list { display:flex; flex-direction:column; gap:.5rem; }
+    .order-list-item {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.75rem 1rem;
+      background:var(--bg-card-2);
+      border:1px solid var(--border);
+      border-radius:var(--radius-md);
+      cursor:pointer;
+      transition:all var(--transition);
+    }
+    .order-list-item:hover { border-color:var(--primary); }
+    .order-list-item.selected { border-color:var(--primary); background:rgba(108,99,255,.1); }
+    .order-list-left { flex:1; min-width:0; }
+    .order-list-id { font-family:monospace; font-weight:700; color:var(--primary); font-size:.9rem; }
+    .order-list-customer { font-size:.82rem; font-weight:600; margin-top:.15rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .order-list-address { font-size:.74rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:180px; }
+
+    /* Status Buttons */
+    .status-grid { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+    .status-btn {
+      display:flex; flex-direction:column; align-items:center; gap:.3rem;
+      padding:.9rem .5rem;
+      border-radius:var(--radius-md);
+      border:2px solid var(--border);
+      background:var(--bg-card-2);
+      color:var(--text-secondary);
+      font-family:'Inter',sans-serif;
+      font-size:.8rem; font-weight:600;
+      cursor:pointer;
+      transition:all var(--transition);
+    }
+    .status-btn .s-icon { font-size:1.5rem; }
+    .status-btn:hover { border-color:var(--primary); color:var(--primary); }
+    .status-btn.active { border-color:var(--success); background:rgba(0,200,150,.1); color:var(--success); }
+    .status-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+    /* GPS Controls */
+    .gps-controls { display:flex; gap:.5rem; }
+    .gps-coords {
+      font-size:.78rem; color:var(--text-secondary);
+      background:var(--bg-card-2); border:1px solid var(--border);
+      border-radius:var(--radius-sm); padding:.5rem .8rem;
+      font-family:monospace;
+    }
+
+    /* Progress bar */
+    .progress-wrap {
+      background: var(--bg-card-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      height: 8px;
+      overflow: hidden;
+      margin-top: .4rem;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #6C63FF, #00C896);
+      border-radius: 999px;
+      transition: width 1.8s ease;
+    }
+    .progress-row {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: .72rem; color: var(--text-muted);
+      margin-top: .3rem;
+    }
+
+    /* ETA box driver */
+    .eta-driver {
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(135deg, rgba(108,99,255,.15), rgba(0,200,150,.1));
+      border: 1px solid rgba(108,99,255,.3);
+      border-radius: var(--radius-md);
+      padding: .8rem 1rem;
+      margin-top: .5rem;
+    }
+    .eta-driver-label { font-size: .72rem; color: var(--text-muted); }
+    .eta-driver-value { font-size: 1.4rem; font-weight: 900; color: var(--primary); }
+
+    /* Activity log */
+    #activity-log {
+      display:flex; flex-direction:column; gap:.4rem;
+      max-height:160px; overflow-y:auto;
+    }
+    .log-entry {
+      display:flex; gap:.5rem; align-items:flex-start;
+      font-size:.76rem; color:var(--text-secondary);
+      padding:.3rem 0; border-bottom:1px solid var(--border);
+    }
+    .log-entry:last-child { border-bottom:none; }
+    .log-time { color:var(--text-muted); flex-shrink:0; font-family:monospace; }
+
+    /* Order info */
+    .order-info-card {
+      background:var(--bg-card-2); border:1px solid var(--border);
+      border-radius:var(--radius-md); padding:1rem;
+    }
+    .order-info-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:.5rem; }
+    .order-info-row:last-child { margin-bottom:0; }
+    .oi-label { font-size:.75rem; color:var(--text-muted); }
+    .oi-value { font-size:.85rem; font-weight:600; }
+
+    /* Loading / empty state */
+    .list-placeholder { text-align:center; padding:1.5rem .5rem; color:var(--text-muted); font-size:.82rem; }
+    .spinner {
+      display:inline-block; width:14px; height:14px;
+      border:2px solid rgba(255,255,255,.15);
+      border-top-color:var(--primary);
+      border-radius:50%; animation:spin .7s linear infinite;
+      vertical-align:middle; margin-right:.3rem;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* Manual input toggle */
+    .manual-toggle { font-size:.75rem; color:var(--text-muted); cursor:pointer; text-decoration:underline; }
+    .manual-toggle:hover { color:var(--primary); }
+  </style>
+</head>
+<body>
+
+<div id="toast-container"></div>
+
+<header>
+  <div>
+    <a href="index.html" class="back-link">← Panel de Control</a>
+    <div class="logo">Delivery<span>Track</span> — <span style="color:var(--warning)">🚴 Repartidor</span></div>
+  </div>
+  <div class="conn-info">
+    <div class="conn-dot" id="conn-dot"></div>
+    <span id="conn-label">Desconectado</span>
+  </div>
+</header>
+
+<main>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <!-- Step 1: Select Order -->
+    <div>
+      <div class="section-label">1. Seleccionar Pedido</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;">
+        <span style="font-size:.8rem;color:var(--text-secondary);">Pedidos disponibles:</span>
+        <button class="btn btn-ghost" onclick="loadOrders()" id="btn-refresh-orders"
+                style="font-size:.72rem;padding:.25rem .6rem;border-radius:8px;">🔄</button>
+      </div>
+      <div class="order-list" id="order-list">
+        <div class="list-placeholder"><span class="spinner"></span> Cargando pedidos...</div>
+      </div>
+      <div style="margin-top:.6rem;text-align:center;">
+        <span class="manual-toggle" onclick="toggleManualInput()">✏️ Ingresar ID manualmente</span>
+      </div>
+    </div>
+
+    <!-- Manual input (hidden by default) -->
+    <div id="manual-input-section" style="display:none;">
+      <div class="section-label">ID Manual</div>
+      <div style="display:flex;gap:.5rem;">
+        <input class="input" id="order-id-input" placeholder="Ej: A1B2C3D4" maxlength="8"
+               style="text-transform:uppercase;" />
+        <button class="btn btn-primary" id="btn-join" onclick="joinOrderByInput()">Unirse</button>
+      </div>
+    </div>
+
+    <!-- Order info (hidden until connected) -->
+    <div id="order-panel" style="display:none;">
+      <div class="section-label">Pedido Activo</div>
+      <div class="order-info-card">
+        <div class="order-info-row">
+          <span class="oi-label">Pedido #</span>
+          <span class="oi-value" id="oi-id" style="font-family:monospace;color:var(--primary);">—</span>
+        </div>
+        <div class="order-info-row">
+          <span class="oi-label">Cliente</span>
+          <span class="oi-value" id="oi-customer">—</span>
+        </div>
+        <div class="order-info-row">
+          <span class="oi-label">Dirección</span>
+          <span class="oi-value" id="oi-address" style="font-size:.78rem;text-align:right;max-width:160px;">—</span>
+        </div>
+        <div class="order-info-row">
+          <span class="oi-label">Estado</span>
+          <span class="badge badge-pending" id="oi-status">Pendiente</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GPS (hidden until connected) -->
+    <div id="gps-panel" style="display:none;">
+      <div class="section-label">2. Enviar Ubicación GPS</div>
+
+      <!-- ETA box -->
+      <div class="eta-driver">
+        <div>
+          <div class="eta-driver-label">⏱️ Tiempo estimado de entrega</div>
+          <div class="eta-driver-value" id="eta-display">— min</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="eta-driver-label">Progreso de ruta</div>
+          <div style="font-size:.72rem;color:var(--text-muted);" id="progress-label">0%</div>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-wrap">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-row">
+        <span>🏪 Restaurante</span>
+        <span>🏠 Destino</span>
+      </div>
+
+      <div class="gps-coords" id="gps-display" style="margin-top:.5rem;">📍 Lat: —  Lng: —</div>
+      <div style="height:.4rem;"></div>
+      <div class="gps-controls">
+        <button class="btn btn-primary w-full" id="btn-sim" onclick="startSimulation()">▶ Iniciar Entrega</button>
+        <button class="btn btn-ghost" id="btn-stop-sim" onclick="stopSimulation()" style="display:none;">⏹ Detener</button>
+        <button class="btn btn-ghost" id="btn-gps" onclick="useRealGPS()" title="Usar GPS real">📍</button>
+      </div>
+    </div>
+
+    <!-- Status (hidden until connected) -->
+    <div id="status-panel" style="display:none;">
+      <div class="section-label">3. Cambiar Estado del Pedido</div>
+      <div class="status-grid">
+        <button class="status-btn" id="btn-recogiendo" onclick="sendStatus('Recogiendo')">
+          <span class="s-icon">🏪</span>Recogiendo
+        </button>
+        <button class="status-btn" id="btn-encamino" onclick="sendStatus('En camino')">
+          <span class="s-icon">🚴</span>En camino
+        </button>
+        <button class="status-btn" id="btn-entregado" onclick="sendStatus('Entregado')" style="grid-column:1/-1;">
+          <span class="s-icon">✅</span>Entregado — Finalizar
+        </button>
+      </div>
+    </div>
+
+    <!-- Log -->
+    <div>
+      <div class="section-label">Registro de Actividad</div>
+      <div id="activity-log">
+        <div class="log-entry">
+          <span class="log-time">--:--:--</span>
+          <span>Esperando selección de pedido...</span>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- Map -->
+  <div id="map"></div>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="assets/js/driver.js"></script>
+<script>
+const TRACKING_URL_ADMIN = 'http://localhost:3000';
+
+const STATUS_CFG = {
+  'Pendiente':  { badge: 'badge-pending',  label: '⏳ Pendiente' },
+  'Recogiendo': { badge: 'badge-picking',  label: '🏪 Recogiendo' },
+  'En camino':  { badge: 'badge-transit',  label: '🚴 En camino' },
+  'Entregado':  { badge: 'badge-done',     label: '✅ Entregado' },
+};
+
+function toggleManualInput() {
+  const sec = document.getElementById('manual-input-section');
+  sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
+}
+
+async function loadOrders() {
+  const btn = document.getElementById('btn-refresh-orders');
+  btn.disabled = true;
+  const list = document.getElementById('order-list');
+  list.innerHTML = '<div class="list-placeholder"><span class="spinner"></span> Cargando...</div>';
+
+  try {
+    const res = await fetch(`${TRACKING_URL_ADMIN}/api/orders`);
+    const orders = await res.json();
+
+    // Show only pending/active orders (not delivered)
+    const active = orders.filter(o => o.status !== 'Entregado');
+
+    if (!active.length) {
+      list.innerHTML = `<div class="list-placeholder">
+        📭 No hay pedidos activos<br>
+        <a href="index.html" style="color:var(--primary);font-size:.78rem;">→ Crear pedido en Panel</a>
+      </div>`;
+      return;
+    }
+
+    list.innerHTML = active.map(o => {
+      const cfg = STATUS_CFG[o.status] || STATUS_CFG['Pendiente'];
+      return `
+        <div class="order-list-item" id="item-${o.id}" onclick="selectOrder('${o.id}')">
+          <div class="order-list-left">
+            <div class="order-list-id">${o.id}</div>
+            <div class="order-list-customer">👤 ${o.customer_name}</div>
+            <div class="order-list-address">📍 ${o.address}</div>
+          </div>
+          <div style="flex-shrink:0;margin-left:.5rem;">
+            <span class="badge ${cfg.badge}" style="font-size:.68rem;">${cfg.label}</span>
+          </div>
+        </div>`;
+    }).join('');
+  } catch (err) {
+    list.innerHTML = `<div class="list-placeholder">❌ Error al cargar pedidos</div>`;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function joinOrderByInput() {
+  const input = document.getElementById('order-id-input');
+  const orderId = input.value.trim().toUpperCase();
+  if (orderId) selectOrder(orderId);
+}
+
+// Wrapper: highlight list item then call real joinOrder from driver.js
+function selectOrder(orderId) {
+  document.querySelectorAll('.order-list-item').forEach(el => el.classList.remove('selected'));
+  const item = document.getElementById(`item-${orderId}`);
+  if (item) item.classList.add('selected');
+  joinOrder(orderId);
+}
+
+// On load
+window.addEventListener('load', async () => {
+  await loadOrders();
+
+  // Auto-join from URL param
+  const params = new URLSearchParams(window.location.search);
+  const orderId = params.get('order');
+  if (orderId) {
+    selectOrder(orderId.toUpperCase());
+  }
+});
+</script>
+</body>
+</html>
