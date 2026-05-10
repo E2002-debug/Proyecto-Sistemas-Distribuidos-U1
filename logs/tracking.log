@@ -1,21 +1,5 @@
-node:events:502
-      throw er; // Unhandled 'error' event
-      ^
 
-Error: listen EADDRINUSE: address already in use :::3000
-   [API] Pedido creado: E5D84A71
-[Socket.IO] 🔌 Conectado: a6qg9GvU6rVn-AjRAAAB
-[Socket.IO] repartidor unido al pedido E5D84A71
-[RabbitMQ] 📤 Publicado [delivery.estado.recogiendo]: {"orderId":"E5D84A71","status":"Recogiendo","customerName":"Ana Torres","deliveryPersonName":"Carlos L","address":"Av. Universitaria, Loja","timestamp":"2026-05-06T17:45:26.598Z"}
-[Socket.IO] Estado actualizado [E5D84A71]: Recogiendo
-[RabbitMQ] 📤 Publicado [delivery.estado.en_camino]: {"orderId":"E5D84A71","status":"En camino","customerName":"Ana Torres","deliveryPersonName":"Carlos L","address":"Av. Universitaria, Loja","timestamp":"2026-05-06T17:45:28.432Z"}
-[Socket.IO] Estado actualizado [E5D84A71]: En camino
-[RabbitMQ] 📤 Publicado [delivery.estado.entregado]: {"orderId":"E5D84A71","status":"Entregado","customerName":"Ana Torres","deliveryPersonName":"Carlos L","address":"Av. Universitaria, Loja","timestamp":"2026-05-06T17:45:31.172Z"}
-[Socket.IO] Estado actualizado [E5D84A71]: Entregado
-[Socket.IO] 🔌 Conectado: qYCQl4y6-u7hFNewAAAD
-[Socket.IO] cliente unido al pedido E5D84A71
-[API] Pedido creado: 9FCD5A11
-[Socket.IO] repartidor unido al pedido 9FCD5A11
-[Socket.IO] cliente unido al pedido 9FCD5A11
-[Socket.IO] 🔴 Desconectado: qYCQl4y6-u7hFNewAAAD
-[Socket.IO] 🔴 Desconectado: a6qg9GvU6rVn-AjRAAAB
+🚀 Tracking Server corriendo en http://localhost:3000
+   WebSocket listo para conexiones
+
+[RabbitMQ] ✅ Conectado al broker

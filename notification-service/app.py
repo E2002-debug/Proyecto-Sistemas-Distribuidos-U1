@@ -178,6 +178,10 @@ def start_consumer():
             time.sleep(5)
 
 # ─── REST & SSE API ───────────────────────────────────────────────────────────
+@app.route('/')
+def index():
+    return jsonify({'service': 'Notification Service', 'status': 'running', 'message': 'API is up and running'})
+
 @app.route('/api/notifications')
 def get_all():
     order_id = request.args.get('order_id')

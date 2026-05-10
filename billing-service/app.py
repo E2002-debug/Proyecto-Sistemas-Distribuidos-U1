@@ -134,6 +134,10 @@ def start_consumer():
             time.sleep(5)
 
 # ─── REST API ─────────────────────────────────────────────────────────────────
+@app.route('/')
+def index():
+    return jsonify({'service': 'Billing Service', 'status': 'running', 'message': 'API is up and running'})
+
 @app.route('/api/invoices')
 def get_invoices():
     return jsonify(all_invoices())

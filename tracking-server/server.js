@@ -71,6 +71,10 @@ async function publishEvent(routingKey, data) {
 }
 
 // ─── REST API ─────────────────────────────────────────────────────────────────
+app.get('/', (req, res) => {
+  res.json({ service: 'Tracking Server', status: 'running', message: 'API is up and running' });
+});
+
 app.get('/api/orders', (req, res) => {
   res.json(db.getOrders());
 });
