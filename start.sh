@@ -38,7 +38,7 @@ echo "  ✅ RabbitMQ activo"
 # ── 2. Tracking Server (Node.js) ─────────────────────────────
 echo ""
 echo "🔌 Instalando dependencias del Tracking Server..."
-cd "$ROOT/tracking-server"
+cd "$ROOT/backend/tracking-server"
 npm install --silent
 echo "  Iniciando Tracking Server en puerto 3000..."
 node server.js > "$LOG_DIR/tracking.log" 2>&1 &
@@ -58,9 +58,9 @@ source "$VENV/bin/activate"
 # ── 4. Billing Service (Flask) ───────────────────────────────
 echo ""
 echo "🧾 Instalando dependencias del Billing Service..."
-pip install -q -r "$ROOT/billing-service/requirements.txt"
+pip install -q -r "$ROOT/backend/billing-service/requirements.txt"
 echo "  Iniciando Billing Service en puerto 5001..."
-cd "$ROOT/billing-service"
+cd "$ROOT/backend/billing-service"
 python app.py > "$LOG_DIR/billing.log" 2>&1 &
 BILLING_PID=$!
 echo "$BILLING_PID" >> "$PIDS_FILE"
@@ -69,9 +69,9 @@ echo "  ✅ Billing Service PID=$BILLING_PID"
 # ── 5. Notification Service (Flask) ──────────────────────────
 echo ""
 echo "🔔 Instalando dependencias del Notification Service..."
-pip install -q -r "$ROOT/notification-service/requirements.txt"
+pip install -q -r "$ROOT/backend/notification-service/requirements.txt"
 echo "  Iniciando Notification Service en puerto 5002..."
-cd "$ROOT/notification-service"
+cd "$ROOT/backend/notification-service"
 python app.py > "$LOG_DIR/notification.log" 2>&1 &
 NOTIF_PID=$!
 echo "$NOTIF_PID" >> "$PIDS_FILE"
