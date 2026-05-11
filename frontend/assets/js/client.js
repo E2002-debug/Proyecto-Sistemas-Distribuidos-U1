@@ -44,38 +44,46 @@ function initMap() {
   routePolyline = L.polyline(DEMO_ROUTE, { color:'#6C63FF', weight:3, opacity:0.5, dashArray:'8 6' }).addTo(map);
 }
 
-// ─── Socket.IO ────────────────────────────────────────────────────────────────
+// ─── Socket.IO (Tiempo Real para GPS) ───────────────────────────────────────────
+// Esta función establece el "túnel" de conexión bidireccional con el Tracking Server
 function connectSocket() {
   socket = io(TRACKING_URL, { transports: ['websocket'] });
 
+  // Cuando nos conectamos exitosamente...
   socket.on('connect', () => {
     setConnStatus('connected', `Conectado · ${socket.id.substring(0,8)}`);
+    // Si ya habíamos escrito un ID de pedido, nos unimos a su "sala privada" automáticamente
     if (currentOrderId) socket.emit('join_order', { orderId: currentOrderId, role: 'cliente' });
   });
 
   socket.on('disconnect', () => setConnStatus('disconnected', 'Desconectado'));
   socket.on('connect_error', () => setConnStatus('connecting', 'Reconectando...'));
 
-  // Order info from server
+  // Escuchamos los datos iniciales del pedido desde el servidor
   socket.on('order_info', (order) => {
     showOrderPanel(order);
     log(`Pedido #${order.id} conectado`, 'ℹ️');
   });
 
-  // Real-time location update
+  // 📍 EVENTO CRÍTICO: Recibiendo las coordenadas GPS
+  // Cada vez que el repartidor se mueve, el servidor hace un "broadcast" y este código se ejecuta
   socket.on('location_update', ({ lat, lng, timestamp }) => {
+    // 1. Movemos el marcador del carrito en el mapa (Leaflet)
     updateDriverMarker(lat, lng);
+    // 2. Actualizamos el texto en pantalla
     document.getElementById('coords-display').textContent =
       `📍 Lat: ${lat.toFixed(6)}  Lng: ${lng.toFixed(6)}`;
+    // 3. Recalculamos el Tiempo Estimado de Llegada (ETA)
     updateETA(lat, lng);
   });
 
-  // Status update from driver
+  // Escuchamos cuando el repartidor cambia el estado del pedido a través de WebSockets
   socket.on('status_update', ({ status, timestamp }) => {
-    updateTimeline(status, timestamp);
+    updateTimeline(status, timestamp); // Pintamos la bolita azul en la línea de tiempo
     showToast(getStatusMessage(status), getStatusType(status));
   });
 
+  // Nos avisa si la otra persona (repartidor) acaba de abrir la aplicación
   socket.on('peer_joined', ({ role }) => {
     if (role === 'repartidor') showToast('🚴 Tu repartidor se ha conectado', 'info');
   });
@@ -113,19 +121,26 @@ async function trackOrder() {
   }
 }
 
-// ─── SSE Notifications ────────────────────────────────────────────────────────
+// ─── SSE Notifications (Eventos unidireccionales desde Python) ────────────────
+// A diferencia de WebSockets, SSE (Server-Sent Events) es una conexión HTTP persistente
+// de una sola vía (Server -> Browser). La usamos para recibir las alertas del Notification Service.
 function subscribeSSE(orderId) {
   if (sseSource) sseSource.close();
+  
+  // Abrimos el canal de notificaciones apuntando al puerto 5002 (Python)
   sseSource = new EventSource(`${NOTIF_URL}/api/notifications/stream?order_id=${orderId}`);
 
+  // Cada vez que Python envía un mensaje (`yield f"data: {json}\n\n"`), esto se ejecuta
   sseSource.onmessage = (e) => {
     const data = JSON.parse(e.data);
-    if (data.type === 'connected') return;
+    if (data.type === 'connected') return; // Ignoramos el mensaje inicial de "ok"
+    
+    // Mostramos la notificación en el panel lateral derecho
     addNotification(data);
   };
 
   sseSource.onerror = () => {
-    console.warn('[SSE] Reconectando...');
+    console.warn('[SSE] Reconectando flujo de notificaciones...');
   };
 }
 

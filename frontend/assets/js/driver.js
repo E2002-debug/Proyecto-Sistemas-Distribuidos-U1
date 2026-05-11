@@ -199,7 +199,8 @@ function resetMap() {
   document.getElementById('eta-display').textContent = calcETA(0);
 }
 
-// ─── GPS / Simulation ─────────────────────────────────────────────────────────
+// ─── GPS / Emisión de Coordenadas ─────────────────────────────────────────────
+// Esta función simula el movimiento del repartidor por la ruta configurada
 function startSimulation() {
   if (!currentOrderId) { showToast('Unéte a un pedido primero', 'error'); return; }
   if (simInterval) return;
@@ -218,56 +219,49 @@ function startSimulation() {
   addLog('Simulación de ruta iniciada', '▶');
   showToast('▶ Simulando entrega... (~' + calcETA(0) + ')', 'info');
 
-  // ✅ Auto: cambiar a Recogiendo al arrancar
   if (currentStatus === 'Pendiente') {
     sendStatus('Recogiendo');
   }
 
-  // Send first position immediately
+  // Enviar la primera posición del array
   sendPosition(DEMO_ROUTE[0]);
 
-  // Flag para emitir 'En camino' solo una vez
   let encaminoSent = false;
-  const ENCAMINO_THRESHOLD = Math.floor(DEMO_ROUTE.length * 0.25); // ~25% de ruta
+  const ENCAMINO_THRESHOLD = Math.floor(DEMO_ROUTE.length * 0.25);
 
+  // Cada 2 segundos (SIM_INTERVAL_MS), avanzamos un punto en el mapa
   simInterval = setInterval(() => {
     simIndex++;
 
+    // Si llegamos al final de la ruta (Destino)
     if (simIndex >= DEMO_ROUTE.length) {
       stopSimulation();
       addLog('¡Ruta completada! Pedido listo para marcar como entregado', '🏁');
       showToast('🏁 Ruta completada — marca como Entregado', 'success');
-      // Resaltar botón Entregado
       const btnEntregado = document.getElementById('btn-entregado');
       if (btnEntregado) {
         btnEntregado.style.animation = 'pulse-green 1s ease-in-out infinite';
         btnEntregado.style.borderColor = 'var(--success)';
         btnEntregado.style.color = 'var(--success)';
       }
-      // Auto-pan to destination
       map.setView(DEMO_ROUTE[DEMO_ROUTE.length - 1], 16, { animate: true });
       return;
     }
 
-
+    // 📍 EVENTO CRÍTICO: Emitimos la coordenada exacta vía WebSocket
     sendPosition(DEMO_ROUTE[simIndex]);
     updateProgressBar(simIndex);
 
-    // ✅ Auto: cambiar a En camino al superar el 25% de la ruta
     if (!encaminoSent && simIndex >= ENCAMINO_THRESHOLD && currentStatus === 'Recogiendo') {
       encaminoSent = true;
       sendStatus('En camino');
     }
 
-    // Update ETA on every step
     const remaining = DEMO_ROUTE.length - 1 - simIndex;
     const etaSecs   = Math.ceil((remaining * SIM_INTERVAL_MS) / 1000);
     document.getElementById('eta-display').textContent = formatETA(etaSecs);
 
-    // Add traveled segment to green line
     routeLine.setLatLngs(DEMO_ROUTE.slice(0, simIndex + 1));
-
-
   }, SIM_INTERVAL_MS);
 }
 
@@ -290,11 +284,14 @@ function useRealGPS() {
   showToast('📍 GPS real activado', 'success');
 }
 
+// Función encargada de emitir el evento `location_update` al servidor Node.js
 function sendPosition([lat, lng]) {
   if (!socket || !socket.connected || !currentOrderId) return;
+  
+  // ⚡ Aquí ocurre la magia del tiempo real: Empujamos nuestras coordenadas al servidor.
   socket.emit('location_update', { orderId: currentOrderId, lat, lng });
 
-  // Smooth marker movement
+  // Movemos nuestro propio marcador localmente
   if (driverMarker) {
     driverMarker.setLatLng([lat, lng]);
   }
@@ -327,21 +324,26 @@ function updateProgressBar(index) {
   if (label) label.textContent = pct + '%';
 }
 
-// ─── Status Update ────────────────────────────────────────────────────────────
+// ─── Status Update (El gatillo para RabbitMQ) ───────────────────────────────
 const STATUS_FLOW = ['Pendiente', 'Recogiendo', 'En camino', 'Entregado'];
 
+// Función que se ejecuta cuando el repartidor presiona los botones de estado
 function sendStatus(status) {
   if (!currentOrderId || !socket || !socket.connected) {
     showToast('Conéctate a un pedido primero', 'error'); return;
   }
+  
+  // 🚀 EVENTO CRÍTICO: Emitimos un cambio de estado hacia Node.js.
+  // Es este evento exacto el que hará que el servidor publique un mensaje en RabbitMQ
+  // para que los microservicios de Python cobren y notifiquen al usuario.
   socket.emit('status_update', { orderId: currentOrderId, status });
+  
   currentStatus = status;
   updateStatusButtons();
   updateBadge(status);
   addLog(`Estado → ${status}`, '📢');
   showToast(`Estado enviado: ${status}`, 'success');
 
-  // Clear Entregado pulse animation if it was active
   if (status === 'Entregado') {
     const btnEntregado = document.getElementById('btn-entregado');
     if (btnEntregado) {
@@ -351,7 +353,7 @@ function sendStatus(status) {
     }
   }
 
-  // If "En camino", auto-start simulation if not running
+  // Automatización: Si marcamos "En camino", iniciar la ruta automáticamente si no ha empezado
   if (status === 'En camino' && !simInterval) {
     setTimeout(startSimulation, 500);
   }
