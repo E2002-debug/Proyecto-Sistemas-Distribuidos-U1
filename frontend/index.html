@@ -214,10 +214,48 @@
     /* Stats row */
     .stats-row {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 1rem;
     }
-    @media(max-width:700px){ .stats-row { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:900px){ .stats-row { grid-template-columns: repeat(3, 1fr); } }
+    @media(max-width:600px){ .stats-row { grid-template-columns: 1fr 1fr; } }
+
+    /* Billing panel */
+    .billing-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .billing-panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(0,200,150,.08), rgba(108,99,255,.08));
+    }
+    .billing-panel-header h2 {
+      font-size: 1rem; font-weight: 700;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .billing-info-box {
+      background: rgba(0,200,150,.07);
+      border: 1px solid rgba(0,200,150,.18);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 1.5rem;
+      font-size: .82rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .billing-info-box strong { color: var(--success); }
+    .billing-info-box code {
+      background: rgba(0,200,150,.12);
+      color: var(--success);
+      padding: .1em .4em;
+      border-radius: 4px;
+      font-size: .82em;
+    }
+    .stat-icon.teal { background: rgba(0,200,150,.15); }
     .stat-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -243,6 +281,34 @@
       border-top: 1px solid var(--border);
       color: var(--text-muted); font-size: .8rem;
     }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%; max-width: 450px;
+      padding: 2rem;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    .invoice-header { text-align: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px dashed var(--border); }
+    .invoice-title { font-size: 1.5rem; font-weight: 800; margin-bottom: .2rem; color: var(--text-primary); }
+    .invoice-number { color: var(--text-muted); font-family: monospace; font-size: .9rem; }
+    .invoice-row { display: flex; justify-content: space-between; margin-bottom: .8rem; font-size: .9rem; }
+    .invoice-row strong { color: var(--text-secondary); }
+    .invoice-total { margin-top: 1.5rem; padding-top: 1rem; border-top: 2px dashed var(--border); font-size: 1.2rem; font-weight: 800; display: flex; justify-content: space-between; color: var(--success); }
+    .modal-close-btn { margin-top: 2rem; width: 100%; }
   </style>
 </head>
 <body>
@@ -286,6 +352,13 @@
       <div>
         <div class="stat-value" id="stat-entregado">—</div>
         <div class="stat-label">Entregados</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon teal">🧾</div>
+      <div>
+        <div class="stat-value" id="stat-revenue">—</div>
+        <div class="stat-label">Ingresos facturados</div>
       </div>
     </div>
   </div>
@@ -388,14 +461,98 @@
     </div>
   </div>
 
+  <!-- Billing DB -->
+  <div>
+    <div class="section-header">
+      <h2>🧾 Módulo de Facturación — Desacoplado vía RabbitMQ</h2>
+      <button class="btn btn-ghost" id="btn-refresh-billing" onclick="loadInvoices()" style="font-size:.82rem;">🔄 Actualizar</button>
+    </div>
+
+    <div class="billing-info-box">
+      <strong>¿Por qué este módulo está separado?</strong><br>
+      En el sistema hipotético monolítico descrito en la problemática, la facturación residía en el mismo servidor central.
+      Un fallo en este módulo comprometía <em>toda la disponibilidad del servicio</em>.
+      En este sistema distribuido, el <code>billing-service</code> (puerto 5001) recibe eventos de estado
+      a través del exchange <code>delivery_events</code> de RabbitMQ de forma <strong>asíncrona y desacoplada</strong>:
+      si el servicio falla, los mensajes se encolan y se procesan cuando vuelve a estar disponible,
+      sin interrumpir el tracking ni las notificaciones.
+      <br><br>
+      💡 Las facturas se generan <strong>automáticamente</strong> cuando un pedido cambia a estado <code>entregado</code> ($15.99).
+    </div>
+
+    <div class="billing-panel">
+      <div class="billing-panel-header">
+        <h2>📋 Tabla <code style="color:var(--success);font-size:.85rem;">invoices</code>
+          <span class="db-count" id="invoice-count" style="background:rgba(0,200,150,.15);color:var(--success);">0</span>
+        </h2>
+        <span style="font-size:.78rem;color:var(--text-muted);">Billing Service · SQLite · Puerto 5001</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Factura</th>
+              <th>ID Pedido</th>
+              <th>Cliente</th>
+              <th>Dirección</th>
+              <th>Evento</th>
+              <th>Monto</th>
+              <th>Fecha</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="invoices-tbody">
+            <tr><td colspan="8">
+              <div class="empty-state">
+                <div class="empty-icon">⏳</div>
+                <p>Cargando facturas...</p>
+              </div>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /main-content -->
 
 <footer>
   DeliveryTrack © 2025 — Sistemas Distribuidos Unidad I · Universidad Nacional de Loja
 </footer>
 
+<!-- Modal HTML -->
+<div class="modal-overlay" id="invoice-modal">
+  <div class="modal-content">
+    <div class="invoice-header">
+      <div class="invoice-title">🧾 FACTURA COMERCIAL</div>
+      <div class="invoice-number" id="modal-inv-id">#000</div>
+    </div>
+    <div class="invoice-row">
+      <strong>ID Pedido:</strong> <span id="modal-inv-order" style="font-family:monospace; color:var(--primary)">---</span>
+    </div>
+    <div class="invoice-row">
+      <strong>Fecha:</strong> <span id="modal-inv-date">---</span>
+    </div>
+    <div class="invoice-row">
+      <strong>Cliente:</strong> <span id="modal-inv-customer">---</span>
+    </div>
+    <div class="invoice-row">
+      <strong>Dirección:</strong> <span id="modal-inv-address" style="text-align:right; max-width:60%;">---</span>
+    </div>
+    <div class="invoice-row" style="margin-top:1rem;">
+      <strong>Concepto:</strong> <span>Servicio de Delivery</span>
+    </div>
+    <div class="invoice-total">
+      <span>TOTAL PAGADO</span>
+      <span id="modal-inv-total">$0.00</span>
+    </div>
+    <button class="btn btn-primary modal-close-btn" onclick="closeInvoiceModal()">Cerrar Factura</button>
+  </div>
+</div>
+
 <script>
 const TRACKING_URL = 'http://localhost:3000';
+const BILLING_URL  = 'http://localhost:5001';
 
 // ── Status config ─────────────────────────────────────────────────────────────
 const STATUS_CFG = {
@@ -563,10 +720,103 @@ function showToast(message, type = 'info') {
   setTimeout(() => toast.remove(), 4500);
 }
 
+// ── Load invoices ─────────────────────────────────────────────────────────────
+async function loadInvoices() {
+  const btn = document.getElementById('btn-refresh-billing');
+  if (btn) { btn.innerHTML = '<span class="spinner"></span> Cargando...'; btn.disabled = true; }
+
+  try {
+    const res = await fetch(`${BILLING_URL}/api/invoices`);
+    const invoices = await res.json();
+    renderInvoices(invoices);
+  } catch (err) {
+    document.getElementById('invoices-tbody').innerHTML = `
+      <tr><td colspan="8">
+        <div class="empty-state">
+          <div class="empty-icon">🔌</div>
+          <p>Billing Service no disponible en puerto 5001.<br>
+          <span style="font-size:.78rem;">Las facturas se generan automáticamente vía RabbitMQ cuando un pedido es entregado.</span></p>
+        </div>
+      </td></tr>`;
+  } finally {
+    if (btn) { btn.innerHTML = '🔄 Actualizar'; btn.disabled = false; }
+  }
+}
+
+function renderInvoices(invoices) {
+  const tbody = document.getElementById('invoices-tbody');
+  
+  // Filtrar solo entregados
+  const entregados = invoices.filter(inv => inv.event === 'entregado');
+  
+  document.getElementById('invoice-count').textContent = entregados.length;
+
+  // Calcular ingresos totales
+  const totalRevenue = entregados.reduce((sum, inv) => sum + (inv.amount || 0), 0);
+  document.getElementById('stat-revenue').textContent = `$${totalRevenue.toFixed(2)}`;
+
+  if (!entregados.length) {
+    tbody.innerHTML = `
+      <tr><td colspan="8">
+        <div class="empty-state">
+          <div class="empty-icon">🧾</div>
+          <p>No hay facturas aún.<br>
+          <span style="font-size:.78rem;">Crea un pedido, asígnalo al repartidor y cambia el estado a <strong>Entregado</strong> para ver la factura generada automáticamente.</span></p>
+        </div>
+      </td></tr>`;
+    return;
+  }
+
+  const EVENT_LABELS = {
+    'entregado':  '<span class="badge badge-done">✅ Entregado</span>',
+  };
+
+  tbody.innerHTML = entregados.map(inv => {
+    const date = new Date(inv.created_at).toLocaleString('es-EC', {
+      month: 'short', day: '2-digit',
+      hour: '2-digit', minute: '2-digit'
+    });
+    const amountColor = inv.amount > 0 ? 'var(--success)' : 'var(--text-muted)';
+    return `
+      <tr>
+        <td><span class="td-id" style="color:var(--success);">#${inv.id}</span></td>
+        <td><span class="td-id">${inv.order_id}</span></td>
+        <td><span class="td-name">👤 ${inv.customer || '—'}</span></td>
+        <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${inv.address || ''}">📍 ${inv.address || '—'}</td>
+        <td>${EVENT_LABELS[inv.event] || inv.event}</td>
+        <td style="font-weight:700;color:${amountColor};font-size:.95rem;">$${(inv.amount||0).toFixed(2)}</td>
+        <td style="font-family:monospace;font-size:.78rem;">${date}</td>
+        <td>
+          <button class="btn btn-ghost btn-xs" onclick="showInvoiceDetails('${inv.id}', '${inv.order_id}', '${inv.customer}', '${inv.address}', ${inv.amount}, '${inv.created_at}')">📄 Detalles</button>
+        </td>
+      </tr>`;
+  }).join('');
+}
+
+function showInvoiceDetails(id, orderId, customer, address, amount, date) {
+  const formattedDate = new Date(date).toLocaleString('es-EC');
+  
+  document.getElementById('modal-inv-id').textContent = 'Factura #' + id;
+  document.getElementById('modal-inv-order').textContent = orderId;
+  document.getElementById('modal-inv-date').textContent = formattedDate;
+  document.getElementById('modal-inv-customer').textContent = customer;
+  document.getElementById('modal-inv-address').textContent = address;
+  document.getElementById('modal-inv-total').textContent = '$' + parseFloat(amount).toFixed(2);
+  
+  document.getElementById('invoice-modal').classList.add('active');
+}
+
+function closeInvoiceModal() {
+  document.getElementById('invoice-modal').classList.remove('active');
+}
+
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 loadOrders();
+loadInvoices();
 // Auto-refresh every 10 seconds
 setInterval(loadOrders, 10000);
+setInterval(loadInvoices, 10000);
 </script>
 </body>
 </html>

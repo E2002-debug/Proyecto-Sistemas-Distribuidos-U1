@@ -165,6 +165,11 @@
     }
     @keyframes spin { to { transform:rotate(360deg); } }
 
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,200,150,0); }
+      50% { box-shadow: 0 0 0 8px rgba(0,200,150,0.3); }
+    }
+
     /* Manual input toggle */
     .manual-toggle { font-size:.75rem; color:var(--text-muted); cursor:pointer; text-decoration:underline; }
     .manual-toggle:hover { color:var(--primary); }
