@@ -1,0 +1,115 @@
+[20:25:50] INFO [Billing] Conectando a RabbitMQ (localhost)...
+[20:25:50] INFO [Billing] 🚀 Billing Service corriendo en http://localhost:5001
+ * Serving Flask app 'app'
+ * Debug mode: off
+[20:25:50] INFO [Billing] Pika version 1.3.2 connecting to ('127.0.0.1', 5672)
+[20:25:50] INFO [Billing] Socket connected: <socket.socket fd=8, family=2, type=1, proto=6, laddr=('127.0.0.1', 50570), raddr=('127.0.0.1', 5672)>
+[20:25:50] INFO [Billing] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.0.117:5001
+[20:25:50] INFO [Billing] Streaming transport linked up: (<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7ca79ef33260>, _StreamingProtocolShim: <SelectConnection PROTOCOL transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7ca79ef33260> params=<ConnectionParameters host=localhost port=5672 virtual_host=/ ssl=False>>).
+[20:25:50] INFO [Billing] [33mPress CTRL+C to quit[0m
+[20:25:50] INFO [Billing] AMQPConnector - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7ca79ef33260> params=<ConnectionParameters host=localhost port=5672 virtual_host=/ ssl=False>>
+[20:25:50] INFO [Billing] AMQPConnectionWorkflow - reporting success: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7ca79ef33260> params=<ConnectionParameters host=localhost port=5672 virtual_host=/ ssl=False>>
+[20:25:50] INFO [Billing] Connection workflow succeeded: <SelectConnection OPEN transport=<pika.adapters.utils.io_services_utils._AsyncPlaintextTransport object at 0x7ca79ef33260> params=<ConnectionParameters host=localhost port=5672 virtual_host=/ ssl=False>>
+[20:25:50] INFO [Billing] Created channel=1
+[20:25:50] INFO [Billing] 🎧 Escuchando cola [billing_queue] con routing_key [delivery.estado.*]
+[20:25:54] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:25:54] "GET /api/invoices HTTP/1.1" 200 -
+[20:26:04] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:26:04] "GET /api/invoices HTTP/1.1" 200 -
+[20:26:14] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:26:14] "GET /api/invoices HTTP/1.1" 200 -
+[20:26:24] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:26:24] "GET /api/invoices HTTP/1.1" 200 -
+[20:26:34] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:26:34] "GET /api/invoices HTTP/1.1" 200 -
+[20:26:44] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:26:44] "GET /api/invoices HTTP/1.1" 200 -
+[20:26:55] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:26:55] "GET /api/invoices HTTP/1.1" 200 -
+[20:27:05] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:27:05] "GET /api/invoices HTTP/1.1" 200 -
+[20:27:15] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:27:15] "GET /api/invoices HTTP/1.1" 200 -
+[20:27:25] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:27:25] "GET /api/invoices HTTP/1.1" 200 -
+[20:27:35] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:27:35] "GET /api/invoices HTTP/1.1" 200 -
+[20:27:45] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:27:45] "GET /api/invoices HTTP/1.1" 200 -
+[20:27:55] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:27:55] "GET /api/invoices HTTP/1.1" 200 -
+[20:28:05] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:28:05] "GET /api/invoices HTTP/1.1" 200 -
+[20:28:15] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:28:15] "GET /api/invoices HTTP/1.1" 200 -
+[20:28:25] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:28:25] "GET /api/invoices HTTP/1.1" 200 -
+[20:28:35] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:28:35] "GET /api/invoices HTTP/1.1" 200 -
+[20:28:46] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:28:46] "GET /api/invoices HTTP/1.1" 200 -
+[20:28:57] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:28:57] "GET /api/invoices HTTP/1.1" 200 -
+[20:29:08] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:29:08] "GET /api/invoices HTTP/1.1" 200 -
+[20:29:18] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:29:18] "GET /api/invoices HTTP/1.1" 200 -
+[20:29:28] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:29:28] "GET /api/invoices HTTP/1.1" 200 -
+[20:29:38] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:29:38] "GET /api/invoices HTTP/1.1" 200 -
+[20:29:49] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:29:49] "GET /api/invoices HTTP/1.1" 200 -
+[20:29:59] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:29:59] "GET /api/invoices HTTP/1.1" 200 -
+[20:30:09] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:30:09] "GET /api/invoices HTTP/1.1" 200 -
+[20:30:19] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:30:19] "GET /api/invoices HTTP/1.1" 200 -
+[20:30:29] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:30:29] "GET /api/invoices HTTP/1.1" 200 -
+[20:30:39] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:30:39] "GET /api/invoices HTTP/1.1" 200 -
+[20:30:40] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:30:40] "GET /api/invoices HTTP/1.1" 200 -
+[20:30:50] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:30:50] "GET /api/invoices HTTP/1.1" 200 -
+[20:31:00] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:31:00] "GET /api/invoices HTTP/1.1" 200 -
+[20:37:24] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:37:24] "GET /api/invoices HTTP/1.1" 200 -
+[20:37:35] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:37:35] "GET /api/invoices HTTP/1.1" 200 -
+[20:37:45] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:37:45] "GET /api/invoices HTTP/1.1" 200 -
+[20:37:55] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:37:55] "GET /api/invoices HTTP/1.1" 200 -
+[20:38:05] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:38:05] "GET /api/invoices HTTP/1.1" 200 -
+[20:38:15] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:38:15] "GET /api/invoices HTTP/1.1" 200 -
+[20:38:25] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:38:25] "GET /api/invoices HTTP/1.1" 200 -
+[20:38:35] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:38:35] "GET /api/invoices HTTP/1.1" 200 -
+[20:38:45] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:38:45] "GET /api/invoices HTTP/1.1" 200 -
+[20:38:55] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:38:55] "GET /api/invoices HTTP/1.1" 200 -
+[20:39:05] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:39:05] "GET /api/invoices HTTP/1.1" 200 -
+[20:39:15] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:39:15] "GET /api/invoices HTTP/1.1" 200 -
+[20:39:25] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:39:25] "GET /api/invoices HTTP/1.1" 200 -
+[20:39:35] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:39:35] "GET /api/invoices HTTP/1.1" 200 -
+[20:39:45] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:39:45] "GET /api/invoices HTTP/1.1" 200 -
+[20:39:55] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:39:55] "GET /api/invoices HTTP/1.1" 200 -
+[20:40:05] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:40:05] "GET /api/invoices HTTP/1.1" 200 -
+[20:40:16] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:40:16] "GET /api/invoices HTTP/1.1" 200 -
+[20:40:26] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:40:26] "GET /api/invoices HTTP/1.1" 200 -
+[20:40:36] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:40:36] "GET /api/invoices HTTP/1.1" 200 -
+[20:40:46] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:40:46] "GET /api/invoices HTTP/1.1" 200 -
+[20:40:57] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:40:57] "GET /api/invoices HTTP/1.1" 200 -
+[20:41:07] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:41:07] "GET /api/invoices HTTP/1.1" 200 -
+[20:41:17] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:41:17] "GET /api/invoices HTTP/1.1" 200 -
+[20:41:27] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:41:27] "GET /api/invoices HTTP/1.1" 200 -
+[20:41:37] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:41:37] "GET /api/invoices HTTP/1.1" 200 -
+[20:41:47] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:41:47] "GET /api/invoices HTTP/1.1" 200 -
+[20:41:57] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:41:57] "GET /api/invoices HTTP/1.1" 200 -
+[20:42:07] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:42:07] "GET /api/invoices HTTP/1.1" 200 -
+[20:42:17] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:42:17] "GET /api/invoices HTTP/1.1" 200 -
+[20:42:27] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:42:27] "GET /api/invoices HTTP/1.1" 200 -
+[20:42:37] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:42:37] "GET /api/invoices HTTP/1.1" 200 -
+[20:42:47] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:42:47] "GET /api/invoices HTTP/1.1" 200 -
+[20:42:57] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:42:57] "GET /api/invoices HTTP/1.1" 200 -
+[20:43:07] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:43:07] "GET /api/invoices HTTP/1.1" 200 -
+[20:43:17] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:43:17] "GET /api/invoices HTTP/1.1" 200 -
+[20:43:27] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:43:27] "GET /api/invoices HTTP/1.1" 200 -
+[20:43:37] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:43:37] "GET /api/invoices HTTP/1.1" 200 -
+[20:43:48] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:43:48] "GET /api/invoices HTTP/1.1" 200 -
+[20:43:58] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:43:58] "GET /api/invoices HTTP/1.1" 200 -
+[20:44:08] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:44:08] "GET /api/invoices HTTP/1.1" 200 -
+[20:44:18] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:44:18] "GET /api/invoices HTTP/1.1" 200 -
+[20:44:28] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:44:28] "GET /api/invoices HTTP/1.1" 200 -
+[20:44:38] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:44:38] "GET /api/invoices HTTP/1.1" 200 -
+[20:44:48] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:44:48] "GET /api/invoices HTTP/1.1" 200 -
+[20:44:58] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:44:58] "GET /api/invoices HTTP/1.1" 200 -
+[20:45:08] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:45:08] "GET /api/invoices HTTP/1.1" 200 -
+[20:45:18] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:45:18] "GET /api/invoices HTTP/1.1" 200 -
+[20:45:28] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:45:28] "GET /api/invoices HTTP/1.1" 200 -
+[20:45:38] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:45:38] "GET /api/invoices HTTP/1.1" 200 -
+[20:45:48] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:45:48] "GET /api/invoices HTTP/1.1" 200 -
+[20:45:58] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:45:58] "GET /api/invoices HTTP/1.1" 200 -
+[20:46:08] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:46:08] "GET /api/invoices HTTP/1.1" 200 -
+[20:46:18] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:46:18] "GET /api/invoices HTTP/1.1" 200 -
+[20:46:28] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:46:28] "GET /api/invoices HTTP/1.1" 200 -
+[20:46:38] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:46:38] "GET /api/invoices HTTP/1.1" 200 -
+[20:46:48] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:46:48] "GET /api/invoices HTTP/1.1" 200 -
+[20:46:58] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:46:58] "GET /api/invoices HTTP/1.1" 200 -
+[20:47:08] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:47:08] "GET /api/invoices HTTP/1.1" 200 -
+[20:47:18] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:47:18] "GET /api/invoices HTTP/1.1" 200 -
+[20:47:28] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:47:28] "GET /api/invoices HTTP/1.1" 200 -
+[20:47:38] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:47:38] "GET /api/invoices HTTP/1.1" 200 -
+[20:47:48] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:47:48] "GET /api/invoices HTTP/1.1" 200 -
+[20:47:58] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:47:58] "GET /api/invoices HTTP/1.1" 200 -
+[20:48:08] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:48:08] "GET /api/invoices HTTP/1.1" 200 -
+[20:48:18] INFO [Billing] 127.0.0.1 - - [10/May/2026 20:48:18] "GET /api/invoices HTTP/1.1" 200 -
