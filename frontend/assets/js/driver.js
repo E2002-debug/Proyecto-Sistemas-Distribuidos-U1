@@ -201,7 +201,7 @@ function resetMap() {
 
 // ─── GPS / Simulation ─────────────────────────────────────────────────────────
 function startSimulation() {
-  if (!currentOrderId) { showToast('Únete a un pedido primero', 'error'); return; }
+  if (!currentOrderId) { showToast('Unéte a un pedido primero', 'error'); return; }
   if (simInterval) return;
 
   simIndex    = 0;
@@ -218,8 +218,17 @@ function startSimulation() {
   addLog('Simulación de ruta iniciada', '▶');
   showToast('▶ Simulando entrega... (~' + calcETA(0) + ')', 'info');
 
+  // ✅ Auto: cambiar a Recogiendo al arrancar
+  if (currentStatus === 'Pendiente') {
+    sendStatus('Recogiendo');
+  }
+
   // Send first position immediately
   sendPosition(DEMO_ROUTE[0]);
+
+  // Flag para emitir 'En camino' solo una vez
+  let encaminoSent = false;
+  const ENCAMINO_THRESHOLD = Math.floor(DEMO_ROUTE.length * 0.25); // ~25% de ruta
 
   simInterval = setInterval(() => {
     simIndex++;
@@ -228,13 +237,27 @@ function startSimulation() {
       stopSimulation();
       addLog('¡Ruta completada! Pedido listo para marcar como entregado', '🏁');
       showToast('🏁 Ruta completada — marca como Entregado', 'success');
+      // Resaltar botón Entregado
+      const btnEntregado = document.getElementById('btn-entregado');
+      if (btnEntregado) {
+        btnEntregado.style.animation = 'pulse-green 1s ease-in-out infinite';
+        btnEntregado.style.borderColor = 'var(--success)';
+        btnEntregado.style.color = 'var(--success)';
+      }
       // Auto-pan to destination
       map.setView(DEMO_ROUTE[DEMO_ROUTE.length - 1], 16, { animate: true });
       return;
     }
 
+
     sendPosition(DEMO_ROUTE[simIndex]);
     updateProgressBar(simIndex);
+
+    // ✅ Auto: cambiar a En camino al superar el 25% de la ruta
+    if (!encaminoSent && simIndex >= ENCAMINO_THRESHOLD && currentStatus === 'Recogiendo') {
+      encaminoSent = true;
+      sendStatus('En camino');
+    }
 
     // Update ETA on every step
     const remaining = DEMO_ROUTE.length - 1 - simIndex;
@@ -243,6 +266,7 @@ function startSimulation() {
 
     // Add traveled segment to green line
     routeLine.setLatLngs(DEMO_ROUTE.slice(0, simIndex + 1));
+
 
   }, SIM_INTERVAL_MS);
 }
@@ -317,11 +341,22 @@ function sendStatus(status) {
   addLog(`Estado → ${status}`, '📢');
   showToast(`Estado enviado: ${status}`, 'success');
 
+  // Clear Entregado pulse animation if it was active
+  if (status === 'Entregado') {
+    const btnEntregado = document.getElementById('btn-entregado');
+    if (btnEntregado) {
+      btnEntregado.style.animation = '';
+      btnEntregado.style.borderColor = '';
+      btnEntregado.style.color = '';
+    }
+  }
+
   // If "En camino", auto-start simulation if not running
   if (status === 'En camino' && !simInterval) {
     setTimeout(startSimulation, 500);
   }
 }
+
 
 function updateStatusButtons() {
   const order = STATUS_FLOW.indexOf(currentStatus);

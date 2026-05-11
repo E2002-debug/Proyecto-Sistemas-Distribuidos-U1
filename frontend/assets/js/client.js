@@ -131,20 +131,48 @@ function subscribeSSE(orderId) {
 
 // ─── UI Helpers ───────────────────────────────────────────────────────────────
 function showOrderPanel(order) {
-  document.getElementById('oi-id').textContent = order.id;
-  document.getElementById('oi-driver').textContent = order.delivery_person_name || '—';
+  document.getElementById('oi-id').textContent      = order.id;
+  document.getElementById('oi-driver').textContent  = order.delivery_person_name || '—';
   document.getElementById('oi-address').textContent = order.address;
-  document.getElementById('order-panel').style.display = 'block';
+  document.getElementById('order-panel').style.display    = 'block';
   document.getElementById('timeline-panel').style.display = 'block';
-  document.getElementById('notif-panel').style.display = 'block';
+  document.getElementById('notif-panel').style.display    = 'block';
 
   // Set confirmed time
   document.getElementById('time-pendiente').textContent = fmtTime(order.created_at);
   document.getElementById('dot-pendiente').classList.add('done');
 
-  // If order already has a status
+  // If order already has a non-pending status, restore full timeline
   if (order.status && order.status !== 'Pendiente') {
     updateTimeline(order.status, order.updated_at);
+  }
+
+  // If already delivered, show Llegó immediately
+  if (order.status === 'Entregado') {
+    const etaEl = document.getElementById('eta-value');
+    etaEl.textContent = '\u00a1Lleg\u00f3!';
+    etaEl.style.fontSize = '1.4rem';
+  }
+
+  // Load historical notifications from notification-service
+  loadHistoricalNotifications(order.id);
+}
+
+async function loadHistoricalNotifications(orderId) {
+  try {
+    const res = await fetch(`${NOTIF_URL}/api/notifications?order_id=${orderId}`);
+    if (!res.ok) return;
+    const notifications = await res.json();
+    // Show oldest first (array comes DESC, so reverse)
+    notifications.reverse().forEach(n => {
+      addNotification({
+        message:   n.message,
+        type:      n.type,
+        timestamp: n.created_at
+      });
+    });
+  } catch (err) {
+    console.warn('[Client] No se pudo cargar historial de notificaciones:', err);
   }
 }
 
@@ -200,22 +228,36 @@ const STATUS_DOTS  = {
 function updateTimeline(status, ts) {
   const key = STATUS_DOTS[status];
   if (!key) return;
-  const dot  = document.getElementById(`dot-${key}`);
-  const time = document.getElementById(`time-${key}`);
-  if (dot)  { dot.classList.remove('active'); dot.classList.add('done'); }
-  if (time) time.textContent = fmtTime(ts);
 
-  // Mark previous dots as done
   const idx = STATUS_ORDER.indexOf(status);
-  STATUS_ORDER.slice(1, idx).forEach(s => {
+
+  // Mark all steps UP TO current as done
+  STATUS_ORDER.slice(1, idx + 1).forEach((s, i) => {
     const k = STATUS_DOTS[s];
-    if (k) document.getElementById(`dot-${k}`)?.classList.add('done');
+    if (!k) return;
+    const dot  = document.getElementById(`dot-${k}`);
+    const time = document.getElementById(`time-${k}`);
+    if (dot) {
+      dot.classList.remove('active');
+      dot.classList.add('done');
+    }
+    // Only set the timestamp for the CURRENT step (the others we don't have exact timestamps)
+    if (s === status && time) {
+      time.textContent = fmtTime(ts);
+    } else if (time && time.textContent === '—') {
+      // Leave blank — will be filled by SSE or historical notifs
+      time.textContent = '—';
+    }
   });
 
-  // Update status badge
+  // Show toast & handle delivery
   if (status === 'Entregado') {
-    document.getElementById('eta-value').textContent = '0';
-    showToast('🎉 ¡Tu pedido ha llegado!', 'success');
+    const etaEl = document.getElementById('eta-value');
+    etaEl.textContent  = '\u00a1Lleg\u00f3!';
+    etaEl.style.fontSize = '1.4rem';
+    showToast('\uD83C\uDF89 \u00a1Tu pedido ha llegado!', 'success');
+  } else {
+    showToast(getStatusMessage(status), getStatusType(status));
   }
 }
 
@@ -232,7 +274,24 @@ function addNotification(notif) {
     <span class="notif-time">${fmtTime(notif.timestamp)}</span>
   `;
   list.prepend(el);
+
+  // Sync timeline timestamps from notification status field
+  const STATUS_TO_DOT = {
+    'recogiendo': 'recogiendo',
+    'en_camino':  'encamino',
+    'entregado':  'entregado',
+  };
+  if (notif.status) {
+    const k = STATUS_TO_DOT[notif.status];
+    if (k) {
+      const timeEl = document.getElementById(`time-${k}`);
+      if (timeEl && timeEl.textContent === '—') {
+        timeEl.textContent = fmtTime(notif.timestamp);
+      }
+    }
+  }
 }
+
 
 function getStatusMessage(status) {
   const map = {
